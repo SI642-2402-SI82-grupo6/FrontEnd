@@ -3,6 +3,11 @@ import Login from '../views/user/Login.vue'
 
 import Register from '../views/user/Register.vue'
 import Home from "../views/home/Home.vue";
+
+function isAuthenticated() {
+  const user = JSON.parse(localStorage.getItem('user'));
+  return user && user.roles.includes('ROLE_ADMIN');
+}
 const routes = [
   {
     path: '/',
@@ -16,7 +21,9 @@ const routes = [
   {
     path: '/home',
     name: 'home',
-    component: Home
+    component: Home,
+    meta: { requiresAuth: true }
+
   },
   {
     path: '/register',
@@ -30,4 +37,14 @@ const router = createRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!isAuthenticated()) {
+      next({ name: 'login' });
+      next();
+    }
+  } else {
+    next();
+  }
+});
 export default router
