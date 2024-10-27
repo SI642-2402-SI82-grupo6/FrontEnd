@@ -1,6 +1,8 @@
 <template>
   <div class="login-container">
     <form @submit.prevent="handleLogin">
+      <h2>Login</h2>
+      <img src="\src\assets\logo.png" alt="Logo" class="login-image">
       <div class="input-group">
         <i class="fas fa-user"></i>
         <input type="text" v-model="username" placeholder="Username" required>
@@ -56,6 +58,7 @@ export default {
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
+  font-size: 1px;
 }
 
 body {
@@ -104,7 +107,7 @@ body {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
-  font-size: 12px;
+  font-size: 20px;
   color: #fff;
 }
 
@@ -125,6 +128,7 @@ body {
   border-radius: 30px;
   color: white;
   font-size: 16px;
+  font-size: 18px;
   cursor: pointer;
 }
 
@@ -135,4 +139,14 @@ body {
 ::placeholder {
   color: #aaa;
 }
+
+.login-image {
+  width: 200px;  
+  height: 200pxpx;
+  margin-bottom: 20px;
+  object-fit: contain; 
+  border-radius: 20px; 
+}
+
+
 </style>

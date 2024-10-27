@@ -2,6 +2,7 @@
   <div class="register-container">
     <form @submit.prevent="handleRegister">
       <h2>Register</h2>
+      <img src="\src\assets\logo.png" alt="Logo" class="login-image">
       <div class="input-group">
         <i class="fas fa-user"></i>
         <input type="text" v-model="username" placeholder="Username" required>
@@ -66,6 +67,7 @@ export default {
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
+  font-size: 20px;
 }
 
 body {
@@ -114,6 +116,7 @@ h2 {
   outline: none;
   font-size: 14px;
   color: #333;
+  font-size: 18px;
 }
 
 .input-group select {
@@ -141,5 +144,12 @@ h2 {
 
 select option {
   color: #333;
+}
+.login-image {
+  width: 200px;  
+  height: 200pxpx;
+  margin-bottom: 20px;
+  object-fit: contain; 
+  border-radius: 20px; 
 }
 </style>
