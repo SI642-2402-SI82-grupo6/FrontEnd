@@ -76,7 +76,7 @@ body {
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   text-align: center;
-  width: 300px;
+  width: 500px;
 }
 
 .input-group {
@@ -108,11 +108,11 @@ body {
   justify-content: space-between;
   margin-bottom: 20px;
   font-size: 20px;
-  color: #fff;
+  color: #ffffff;
 }
 
 .remember-register a {
-  color: #fff;
+  color: #000000;
   text-decoration: none;
 }
 
@@ -127,7 +127,6 @@ body {
   border: none;
   border-radius: 30px;
   color: white;
-  font-size: 16px;
   font-size: 18px;
   cursor: pointer;
 }
