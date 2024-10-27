@@ -1,1 +1,1 @@
-web: npm install && bin/start-nginx-solo
+web: bin/start-nginx-solo
