@@ -30,7 +30,7 @@ export default {
     },
     logout() {
       FinanceDataService.logout().then(data => {
-        alert(data.message); // Display the message in an alert
+        alert(data.message);
         this.$router.push('/login');
       }).catch(error => {
         console.error(error);
