@@ -51,7 +51,7 @@ export default {
 }
 
 body {
-  background: linear-gradient(135deg, #1e3c72, #2a5298, #f093fb);
+  background: url('../assets/background.jpg');
   height: 100vh;
   display: flex;
   justify-content: center;
