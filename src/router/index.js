@@ -22,7 +22,7 @@ const routes = [
     path: '/home',
     name: 'home',
     component: Home,
-    meta: { requiresAuth: true }
+
 
   },
   {
