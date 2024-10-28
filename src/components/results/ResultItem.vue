@@ -1,9 +1,7 @@
 <script >
-import { Card } from 'primevue/card';
-import { Button } from 'primevue/button';
 
 export default {
-  components: { Card, Button },
+  components: { },
   props: {
     result: {
       type: Object,
@@ -22,7 +20,7 @@ export default {
     <div class="result-item">
       <h4>{{ result.title }}</h4>
       <p>{{ result.description }}</p>
-      <Button label="Detalles" icon="pi pi-info-circle" @click="viewDetails" />
+      <pv-button label="Detalles" icon="pi pi-info-circle" @click="viewDetails" />
     </div>
   </Card>
 </template>
