@@ -1,8 +1,10 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import Login from '../views/user/Login.vue'
-
 import Register from '../views/user/Register.vue'
 import Home from "../views/home/Home.vue";
+
+import InvoiceView from "../views/document/InvoiceView.vue";
+import LetterView from "../views/document/LetterView.vue";
 
 function isAuthenticated() {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -22,13 +24,21 @@ const routes = [
     path: '/home',
     name: 'home',
     component: Home,
-
-
   },
   {
     path: '/register',
     name: 'register',
     component: Register
+  },
+  {
+    path: '/wallet/facturas',
+    name: 'invoice',
+    component: InvoiceView
+  },
+  {
+    path: '/wallet/letras',
+    name: 'letter',
+    component: LetterView
   }
 ]
 
