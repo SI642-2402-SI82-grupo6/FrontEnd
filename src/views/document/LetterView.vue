@@ -5,16 +5,6 @@ export default {
   name: 'DocumentLetter',
   components: {
     LetterItem
-  },
-  data() {
-    return {
-      letter: {
-        number: 'LET-001',
-        date: '2023-10-01',
-        amount: 500,
-        status: 'Pending'
-      }
-    };
   }
 };
 </script>
@@ -22,7 +12,7 @@ export default {
 <template>
   <div class="letter-view-container">
     <h2>Vista de Letra</h2>
-    <LetterItem :letter="letter" />
+    <LetterItem />
   </div>
 </template>
 
