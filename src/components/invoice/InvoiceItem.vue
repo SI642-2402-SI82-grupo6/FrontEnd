@@ -51,7 +51,7 @@ export default {
   </pv-card>
 </template>
 
-<style>
+<style scoped>
 .invoice-item {
   display: flex;
   flex-direction: column;

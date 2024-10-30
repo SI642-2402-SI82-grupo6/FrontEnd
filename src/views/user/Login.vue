@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import FinanceDataService from '../../services/FinanceDataService'
 
+import AuthService from '../../services/AuthService'
 export default {
   name: 'UserLogin',
   data() {
@@ -30,16 +30,17 @@ export default {
       password: ''
     }
   },
-  methods:{
+  methods: {
     async handleLogin() {
       const data = {
         username: this.username,
         password: this.password
       };
       try {
-        await FinanceDataService.signin(data);
-        this.$router.push('/home');
+        const response = await AuthService.login(data.username, data.password);
+        this.$router.push('/home'); // Redirigir a home
       } catch (error) {
+        console.error('Error durante el inicio de sesión:', error); // Agregar más detalles en caso de error
         alert('Login failed');
       }
     },
@@ -48,9 +49,9 @@ export default {
     }
   }
 }
-</script >
+</script>
 
-<style  scoped>
+<style scoped>
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
 
 * {
@@ -58,8 +59,6 @@ export default {
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
-
-
 }
 
 body {
@@ -70,8 +69,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-
-
 }
 
 .login-container {
@@ -80,12 +77,11 @@ body {
   backdrop-filter: blur(10px);
   text-align: center;
   width: 500px;
-  background-color: rebeccapurple;
+  background-color: rgba(128, 0, 128, 0.8); /* Color de fondo semitransparente */
 }
 
 .login-container form {
   margin-bottom: 20px;
-  background-color: rebeccapurple;
 }
 
 .input-group {

@@ -101,14 +101,17 @@ class FinanceDataService {
     signup(data) {
         return http.post(`/auth/signup`, data);
     }
-
-    signin(data) {
-        return http.post(`/auth/signin`, data);
+    deleteCostesGastosAll(){
+        return http.delete(`/wallet/costes-gastos`);
     }
+
+
 
     logout() {
         return http.post(`/auth/logout`).then(response => {
             if (response.data && response.data.message) {
+                localStorage.removeItem('authToken'); // Remove the token from localStorage
+                localStorage.removeItem('user'); // Remove the user from localStorage
                 return response.data;
             } else {
                 throw new Error("Logout response does not contain a message.");

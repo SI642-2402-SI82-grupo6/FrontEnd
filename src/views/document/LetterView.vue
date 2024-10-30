@@ -26,62 +26,96 @@ export default {
 };
 </script>
 
-<template>
-
-    <h2>Vista de Letra</h2>
-    <div class="top-container">
-
-        <RateAndTermInformation ref="rateAndTermInfo"/>
-
-
-        <LetterInformation ref="letterInfo"/>
-
+<template id="app">
+  <div class="p-grid p-nogutter equal-height">
+    <div class="p-col-12 p-md-6">
+      <!-- Rate And Term Information -->
+      <RateAndTermInformation ref="rateAndTermInfo" />
     </div>
-
-      <CostsAndExpensesInformation ref="costsAndExpensesInfo"/>
-
-    <Button @click="submitAll" label="Agregar Letra" class="submit-button"/>
-
+    <div class="p-col-12 p-md-6">
+      <!-- Letter Information -->
+      <LetterInformation ref="letterInfo" />
+    </div>
+  </div>
+  <div class="p-grid p-nogutter">
+    <div class="p-col-12">
+      <!-- Costs And Expenses Information -->
+      <CostsAndExpensesInformation ref="costsAndExpensesInfo" />
+    </div>
+  </div>
+  <Button @click="submitAll" label="Agregar Letra" class="submit-button" />
 </template>
 
-<style>
-.letter-view-container {
-  background-color: #000;
-  padding: 40px;
-  border-radius: 15px;
-  text-align: left;
-  width: 90%;
-  max-width: 1200px;
-  margin: 20px auto;
-  color: #fff; /* Ensure text is visible on black background */
-}
 
-h2 {
-  color: #fff;
-  font-size: 24px;
-  margin-bottom: 20px;
-}
 
-.top-container {
+
+<style scoped>
+.p-grid {
   display: flex;
-  justify-content: space-between;
-  gap: 20px;
   flex-wrap: wrap;
+  margin: 0;
 }
 
-.left, .right {
-  flex: 1;
-  min-width: 300px;
+.p-nogutter {
+  margin-right: 0;
+  margin-left: 0;
 }
 
-.bottom {
-  margin-top: 20px;
+.p-col-12 {
+  flex: 1 1 100%;
+  box-sizing: border-box;
+}
+
+.p-col-12.p-md-6 {
+  flex: 1 1 50%;
 }
 
 .submit-button {
-  margin-top: 20px;
-  width: 100%;
-  color: black;
-
+  display: block;
+  margin: 20px auto;
 }
+
+.p-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+.p-nogutter {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.p-col-12 {
+  flex: 1 1 100%;
+  box-sizing: border-box;
+}
+
+.p-col-12.p-md-6 {
+  flex: 1 1 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.equal-height {
+  display: flex;
+}
+
+.equal-height > .p-col-12.p-md-6 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+}
+
+.equal-height > .p-col-12.p-md-6 > * {
+  flex-grow: 1;
+}
+
+.submit-button {
+  display: block;
+  margin: 20px auto;
+}
+
+
 </style>

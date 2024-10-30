@@ -24,7 +24,7 @@ export default {
   </div>
 </template>
 
-<style >
+<style scoped >
 .query-results {
   display: grid;
   gap: 1rem;

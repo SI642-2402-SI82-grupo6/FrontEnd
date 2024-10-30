@@ -48,7 +48,7 @@ export default {
   </pv-card>
 </template>
 
-<style>
+<style scoped>
 .letter-item {
   display: flex;
   flex-direction: column;

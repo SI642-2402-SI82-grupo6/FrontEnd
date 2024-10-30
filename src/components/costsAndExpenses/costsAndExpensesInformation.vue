@@ -1,6 +1,8 @@
 <template>
   <Card title="Gastos">
-    <template #content>
+
+    <template #content>{
+      <h3>Agregar Gastos</h3>
       <form @submit.prevent="submitCostsAndExpenses">
         <div>
           <label for="tipoGasto" class="black-text">Tipo Gasto:</label>
@@ -29,10 +31,10 @@
               v-model="costsAndExpenses.valorExpresado.esPorcentaje"
               :binary="true"
           />
-          <label for="esPorcentaje">Es Porcentaje</label>
+
         </div>
-        <InputGroup>
-          <label for="valor">Valor:</label>
+        <div>
+          <label >Valor:</label>
           <Button
               v-if="!costsAndExpenses.valorExpresado.esPorcentaje"
               type="button"
@@ -50,8 +52,26 @@
               :prefix="currencySymbol"
               required
           />
-        </InputGroup>
+        </div>
         <Button type="submit" class="black-text">Enviar</Button>
+        <div class="card flex justify-content-center">
+          <Button label="Show" icon="pi pi-external-link" @click="visible = true" />
+          <Dialog
+              v-model:visible="visible"
+              modal
+              header="Header"
+              :style="{ width: '50rem' }"
+              :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
+          >
+            <DataTable :value="costesGastos"  class="text-surface-500 dark:text-surface-400 block mb-8">
+              <Column  field="tipoGasto" header="Tipo de Gasto"></Column>
+              <Column field="motivoGasto" header="Motivo de Gasto"></Column>
+              <Column  field="valorExpresado.valor" header="Valor Expresado"></Column>
+            </DataTable>
+          </Dialog>
+          <Button label="Limpiar" icon="pi pi-times" @click="deleteCostesGastos" />
+        </div>
+
       </form>
     </template>
   </Card>
@@ -59,11 +79,17 @@
 
 <script>
 import FinanceDataService from '../../services/FinanceDataService.js';
+import 'primeicons/primeicons.css';
+import { ref } from 'vue';
+
 
 export default {
   name: 'CostsAndExpensesInformation',
+
   data() {
     return {
+      visible: false,
+      costesGastos: [],
       costsAndExpenses: {
         tipoGasto: 'INICIAL',
         motivoGasto: '',
@@ -95,28 +121,62 @@ export default {
     'costsAndExpenses.valorExpresado.esPorcentaje'(newValue) {
       this.currencySymbol = newValue ? '%' : '$';
     },
+    visible(newValue) {
+      if (newValue) {
+        this.fetchCostesGastos();
+      }
+    }
   },
   methods: {
     async submitCostsAndExpenses() {
       try {
-        const response = await FinanceDataService.createCostesGastos(this.costsAndExpenses);
+        const dataToSend = {
+          ...this.costsAndExpenses,
+          tipoGasto: this.costsAndExpenses.tipoGasto.value
+        };
+        console.log('Data to be sent:', dataToSend); // Log the data being sent
+        const response = await FinanceDataService.createCostesGastos(dataToSend);
         console.log('Costs and Expenses created:', response.data);
       } catch (error) {
-        console.error('Error creating Costs and Expenses:', error);
+        console.error('Error creating Costs and Expenses:', error.response || error.message);
       }
     },
     toggleCurrency() {
       this.currencySymbol = this.currencySymbol === '$' ? 'S/.' : '$';
     },
+    async fetchCostesGastos() {
+      try {
+        const response = await FinanceDataService.getAllCostesGastos();
+        this.costesGastos = response.data;
+        console.log('Fetched data:', this.costesGastos);
+      } catch (error) {
+        // Asegúrate de que el error es significativo
+        console.error('Error fetching Costs and Expenses:', error.response || error.message);
+      }
+    },
+    async deleteCostesGastos() {
+      try {
+        const response= await FinanceDataService.deleteCostesGastosAll();
+        console.log('Costs and Expenses deleted:', response.data);
+      } catch (error) {
+        console.error('Error deleting Costs and Expenses:', error.response || error.message);
+      }
+    }
+
   },
+
 };
+
 </script>
 
 <style scoped>
 form {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 1rem;
+  width: 100%;
 }
 
 label {
@@ -140,6 +200,15 @@ button {
 }
 
 .card {
-  display: block; /* Asegúrate de que no esté oculto */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+h3 {
+  text-align: center;
+  width: 100%;
 }
 </style>

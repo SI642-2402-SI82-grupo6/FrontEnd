@@ -25,7 +25,7 @@ export default {
   </Card>
 </template>
 
-<style >
+<style scoped >
 .result-item {
   display: flex;
   flex-direction: column;

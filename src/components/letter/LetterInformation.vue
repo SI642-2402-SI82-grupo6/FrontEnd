@@ -27,31 +27,39 @@ export default {
 </script>
 
 <template>
-  <form @submit.prevent="submitLetter">
-    <div>
-      <label for="fechaGiro">Fecha Giro:</label>
-      <input type="date" id="fechaGiro" v-model="letter.fechaGiro" required>
-    </div>
-    <div>
-      <label for="fechaVencimiento">Fecha Vencimiento:</label>
-      <input type="date" id="fechaVencimiento" v-model="letter.fechaVencimiento" required>
-    </div>
-    <div>
-      <label for="valorNominal">Valor Nominal:</label>
-      <input type="number" id="valorNominal" v-model="letter.valorNominal" required>
-    </div>
-    <div>
-      <label for="retencion">Retencion:</label>
-      <input type="number" id="retencion" v-model="letter.retencion" required>
-    </div>
+  <Card title="letterInformation">
 
-  </form>
+    <template #content>
+      <h3>Informacion Letra</h3>
+    <form @submit.prevent="submitLetter">
+      <div class="p-field">
+        <p class="m-0">Fecha Giro:</p>
+        <Calendar id="fechaGiro" v-model="letter.fechaGiro" required />
+      </div>
+      <div class="p-field">
+        <p class="m-0" >Fecha Vencimiento:</p>
+        <Calendar id="fechaVencimiento" v-model="letter.fechaVencimiento" required />
+      </div>
+      <div class="p-field">
+        <p class="m-0">Valor Nominal:</p>
+        <InputNumber  id="valorNominal" v-model="letter.valorNominal" mode="decimal"               :minFractionDigits="0"
+                      :maxFractionDigits="4" required />
+      </div>
+      <div class="p-field">
+        <p class="m-0">Retencion:</p>
+        <InputNumber id="retencion" v-model="letter.retencion" mode="decimal"               :minFractionDigits="0"
+                     :maxFractionDigits="4" required />
+      </div>
+
+    </form>
+    </template>
+  </Card>
 </template>
 
 <style scoped>
 form {
-  display: flex;
-  flex-direction: column;
+
+
   gap: 1rem;
 }
 
@@ -68,5 +76,9 @@ button {
   padding: 0.5rem 1rem;
   font-size: 1rem;
   cursor: pointer;
+}
+h3 {
+  text-align: center;
+  width: 100%;
 }
 </style>

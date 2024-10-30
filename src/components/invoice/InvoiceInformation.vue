@@ -27,32 +27,44 @@ export default {
 </script>
 
 <template>
-  <form @submit.prevent="submitInvoice">
-    <div>
-      <label for="fechaEmision">Fecha Emision:</label>
-      <input type="date" id="fechaEmision" v-model="invoice.fechaEmision" required>
-    </div>
-    <div>
-      <label for="fechaPago">Fecha Pago:</label>
-      <input type="date" id="fechaPago" v-model="invoice.fechaPago" required>
-    </div>
-    <div>
-      <label for="totalFacturado">Total Facturado:</label>
-      <input type="number" id="totalFacturado" v-model="invoice.totalFacturado" required>
-    </div>
-    <div>
-      <label for="retencion">Retencion:</label>
-      <input type="number" id="retencion" v-model="invoice.retencion" required>
-    </div>
+  <Card>
 
-  </form>
+    <template #content>
+      <h3>Invoice Information</h3>
+      <form @submit.prevent="submitInvoice">
+        <div class="p-field">
+          <label for="fechaEmision">Fecha Emision:</label>
+          <Calendar  id="fechaEmision" v-model="invoice.fechaEmision" required></Calendar >
+        </div>
+        <div class="p-field">
+          <label for="fechaPago">Fecha Pago:</label>
+          <Calendar  id="fechaPago" v-model="invoice.fechaPago" required></Calendar >
+        </div>
+        <div class="p-field">
+          <label for="totalFacturado">Total Facturado:</label>
+          <InputNumber  id="totalFacturado" v-model="invoice.totalFacturado" mode="decimal"               :minFractionDigits="0"
+                        :maxFractionDigits="4" required></InputNumber>
+        </div>
+        <div class="p-field">
+          <label for="retencion">Retencion:</label>
+          <InputNumber  id="retencion" v-model="invoice.retencion" mode="decimal"               :minFractionDigits="0"
+                        :maxFractionDigits="4" required></InputNumber>
+        </div>
+
+      </form>
+    </template>
+  </Card>
 </template>
+
 
 <style scoped>
 form {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 1rem;
+  width: 100%;
 }
 
 label {
@@ -68,5 +80,18 @@ button {
   padding: 0.5rem 1rem;
   font-size: 1rem;
   cursor: pointer;
+}
+
+h3 {
+  text-align: center;
+  width: 100%;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 </style>

@@ -13,7 +13,9 @@ export default {
         fechaDescuento: '',
         tasaEfectiva: 0,
         plazoEfectivo: 0
-      }
+      },
+      tipoTasaOptions: ['EFECTIVA', 'NOMINAL'],
+
     }
   },
   methods: {
@@ -30,51 +32,70 @@ export default {
 </script>
 
 <template>
-  <form @submit.prevent="submitRateAndTerm">
-    <div>
-      <label for="tipoTasa">Tipo Tasa:</label>
-      <select id="tipoTasa" v-model="rateAndTerm.tipoTasa" required>
-        <option value="NOMINAL">NOMINAL</option>
-        <option value="EFECTIVA">EFECTIVA</option>
-      </select>
-    </div>
-    <div v-if="rateAndTerm.tipoTasa === 'NOMINAL'">
-      <div>
-        <label for="tasaNominal">Tasa Nominal:</label>
-        <input type="number" id="tasaNominal" v-model="rateAndTerm.tasaNominal" required>
-      </div>
-      <div>
-        <label for="plazoDeTasa">Plazo de Tasa:</label>
-        <input type="number" id="plazoDeTasa" v-model="rateAndTerm.plazoDeTasa" required>
-      </div>
-      <div>
-        <label for="periodoCapital">Periodo Capital:</label>
-        <input type="number" id="periodoCapital" v-model="rateAndTerm.periodoCapital" required>
-      </div>
-    </div>
-    <div v-else>
-      <div>
-        <label for="tasaEfectiva">Tasa Efectiva:</label>
-        <input type="number" id="tasaEfectiva" v-model="rateAndTerm.tasaEfectiva" required>
-      </div>
-      <div>
-        <label for="plazoEfectivo">Plazo Efectivo:</label>
-        <input type="number" id="plazoEfectivo" v-model="rateAndTerm.plazoEfectivo" required>
-      </div>
-    </div>
-    <div>
-      <label for="fechaDescuento">Fecha Descuento:</label>
-      <input type="date" id="fechaDescuento" v-model="rateAndTerm.fechaDescuento" required>
-    </div>
+  <Card>
 
-  </form>
+    <template #content>
+      <h3>Informacion de Tasa y Plazo</h3>
+      <form @submit.prevent="submitRateAndTerm">
+        <div class="p-field">
+          <label >Tipo Tasa:</label>
+          <Dropdown
+              id="tipoTasa"
+              v-model="rateAndTerm.tipoTasa"
+              :options="tipoTasaOptions"
+
+              placeholder="Seleccione tipo de tasa"
+              required
+          />
+        </div>
+
+        <div v-if="rateAndTerm.tipoTasa === 'EFECTIVA'">
+          <div class="p-field">
+            <label >Tasa Nominal:</label>
+            <InputNumber id="tasaNominal" v-model="rateAndTerm.tasaNominal" required />
+          </div>
+          <div class="p-field">
+            <label >Plazo de Tasa:</label>
+            <InputNumber id="plazoDeTasa" v-model="rateAndTerm.plazoDeTasa" required />
+          </div>
+          <div class="p-field">
+            <label >Periodo Capital:</label>
+            <InputNumber id="periodoCapital" v-model="rateAndTerm.periodoCapital" required />
+          </div>
+        </div>
+
+        <div v-if="rateAndTerm.tipoTasa === 'NOMINAL'">
+          <div class="p-field">
+            <label >Tasa Efectiva:</label>
+            <InputNumber id="tasaEfectiva" v-model="rateAndTerm.tasaEfectiva" required />
+          </div>
+          <div class="p-field">
+            <label >Plazo Efectivo:</label>
+            <InputNumber id="plazoEfectivo" v-model="rateAndTerm.plazoEfectivo" required />
+          </div>
+        </div>
+
+        <div  class="p-field">
+          <label >Fecha Descuento:</label>
+          <Calendar id="fechaDescuento" v-model="rateAndTerm.fechaDescuento" required />
+        </div>
+
+
+      </form>
+    </template>
+  </Card>
 </template>
 
-<style >
+
+
+<style scoped>
 form {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 1rem;
+  height: 100%;
 }
 
 label {
@@ -90,5 +111,17 @@ button {
   padding: 0.5rem 1rem;
   font-size: 1rem;
   cursor: pointer;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+h3 {
+  text-align: center;
+  width: 100%;
 }
 </style>

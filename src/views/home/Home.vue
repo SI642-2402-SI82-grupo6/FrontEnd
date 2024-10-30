@@ -21,7 +21,7 @@ export default {
   </div>
 </template>
 
-<style>
+<style scoped>
 .home-container {
   display: flex;
   flex-direction: row;
