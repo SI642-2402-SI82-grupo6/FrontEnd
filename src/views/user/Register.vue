@@ -1,8 +1,12 @@
 <template>
   <div class="register-container">
+    <div class="login-btn">
+      <a @click="goToLogin">¿Tienes una cuenta? Inicia sesion</a>
+    </div>
+
     <form @submit.prevent="handleRegister">
       <h2>Register</h2>
-      <img src="\src\assets\logo.png" alt="Logo" class="login-image">
+      <img src="../../assets/logo.png" alt="Logo" class="login-image">
       <div class="input-group">
         <i class="fas fa-user"></i>
         <input type="text" v-model="username" placeholder="Username" required>
@@ -17,12 +21,14 @@
       </div>
       <button type="submit" class="register-btn">REGISTER</button>
     </form>
+
   </div>
+
 </template>
 
 <script>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import {ref} from 'vue';
+import {useRouter} from 'vue-router';
 import FinanceDataService from '../../services/FinanceDataService';
 
 export default {
@@ -50,18 +56,25 @@ export default {
       }
     };
 
+    const goToLogin = () => {
+      router.push('/login');
+    };
+
     return {
       username,
       email,
       roles,
       password,
-      handleRegister
+      handleRegister,
+      goToLogin
     };
   }
 };
 </script>
 
-<style >
+<style scoped>
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
 * {
   margin: 0;
   padding: 0;
@@ -79,7 +92,7 @@ body {
 }
 
 .register-container {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rebeccapurple;
   padding: 40px;
   border-radius: 10px;
   backdrop-filter: blur(10px);
@@ -114,7 +127,7 @@ h2 {
   border: none;
   border-radius: 30px;
   outline: none;
-  font-size: 14px;
+
   color: #333;
   font-size: 18px;
 }
@@ -138,6 +151,24 @@ h2 {
   background-color: #555;
 }
 
+.login-btn {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #ffffff;
+}
+.login-btn a {
+  color: #ffffff;
+  text-decoration: none;
+}
+.login-btn a:hover {
+  text-decoration: underline;
+}
+
+
+
+
 ::placeholder {
   color: #aaa;
 }
@@ -145,11 +176,12 @@ h2 {
 select option {
   color: #333;
 }
+
 .login-image {
-  width: 200px;  
-  height: 200pxpx;
+  width: 200px;
+  height: 200px;
   margin-bottom: 20px;
-  object-fit: contain; 
-  border-radius: 20px; 
+  object-fit: contain;
+  border-radius: 20px;
 }
 </style>

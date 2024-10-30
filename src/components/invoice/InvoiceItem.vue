@@ -15,7 +15,7 @@ export default {
   },
   methods: {
     fetchInvoice() {
-      FinanceDataService.getFactura(this.invoiceId)
+      FinanceDataService.getFactura(this.InvoiceModel.id)
           .then(response => {
             this.invoice = response.data;
           })

@@ -51,7 +51,7 @@ export default {
 }
 
 body {
-  background: url('../assets/background.jpg');
+
   height: 100vh;
   display: flex;
   justify-content: center;

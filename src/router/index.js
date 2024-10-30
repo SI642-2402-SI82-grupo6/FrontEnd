@@ -31,12 +31,12 @@ const routes = [
     component: Register
   },
   {
-    path: '/wallet/facturas',
+    path: '/factura',
     name: 'invoice',
     component: InvoiceView
   },
   {
-    path: '/wallet/letras',
+    path: '/letra',
     name: 'letter',
     component: LetterView
   }

@@ -2,7 +2,7 @@
   <div class="login-container">
     <form @submit.prevent="handleLogin">
       <h2>Login</h2>
-      <img src="\src\assets\logo.png" alt="Logo" class="login-image">
+      <img src="../../assets/logo.png" alt="Logo" class="login-image">
       <div class="input-group">
         <i class="fas fa-user"></i>
         <input type="text" v-model="username" placeholder="Username" required>
@@ -12,7 +12,7 @@
         <input type="password" v-model="password" placeholder="Password" required>
       </div>
       <div class="remember-register">
-        <a @click.prevent="goToRegister">Register a new user</a>
+        <a @click.prevent="goToRegister">¿No tienes una cuenta? Crea una nueva cuenta</a>
       </div>
       <button type="submit" class="login-btn">LOGIN</button>
     </form>
@@ -48,9 +48,9 @@ export default {
     }
   }
 }
-</script>
+</script >
 
-<style >
+<style  scoped>
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
 
 * {
@@ -58,25 +58,34 @@ export default {
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
-  font-size: 1px;
+
+
 }
 
 body {
+  background: url('../../assets/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  height: 100vh;
+  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background: linear-gradient(135deg, #1e3c72, #2a5298, #f093fb);
+
+
 }
 
 .login-container {
-  background-color: rgba(255, 255, 255, 0.15);
   padding: 40px;
   border-radius: 10px;
   backdrop-filter: blur(10px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   text-align: center;
   width: 500px;
+  background-color: rebeccapurple;
+}
+
+.login-container form {
+  margin-bottom: 20px;
+  background-color: rebeccapurple;
 }
 
 .input-group {
@@ -112,7 +121,7 @@ body {
 }
 
 .remember-register a {
-  color: #000000;
+  color: #ffffff;
   text-decoration: none;
 }
 
@@ -140,12 +149,10 @@ body {
 }
 
 .login-image {
-  width: 200px;  
-  height: 200pxpx;
+  width: 200px;
+  height: 200px;
   margin-bottom: 20px;
-  object-fit: contain; 
-  border-radius: 20px; 
+  object-fit: contain;
+  border-radius: 20px;
 }
-
-
 </style>

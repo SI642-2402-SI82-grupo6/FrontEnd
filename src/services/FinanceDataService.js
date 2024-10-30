@@ -22,6 +22,10 @@ class FinanceDataService {
         return http.post(`/wallet/tasa-y-plazo`, data);
     }
 
+    deleteAllTasaYPlazo() {
+        return http.delete(`/wallet/tasa-y-plazo`);
+    }
+
     getLetra(id) {
         return http.get(`/wallet/letras/${id}`);
     }
@@ -86,6 +90,13 @@ class FinanceDataService {
         return http.post(`/wallet/resultados/consulta`, data);
     }
 
+    getAllResultadosConsulta() {
+        return http.get(`/wallet/resultados/consulta/all`);
+    }
+
+    getResultadosCartera() {
+        return http.get(`/wallet/resultados/cartera/consultar`);
+    }
 
     signup(data) {
         return http.post(`/auth/signup`, data);
@@ -94,6 +105,7 @@ class FinanceDataService {
     signin(data) {
         return http.post(`/auth/signin`, data);
     }
+
     logout() {
         return http.post(`/auth/logout`).then(response => {
             if (response.data && response.data.message) {

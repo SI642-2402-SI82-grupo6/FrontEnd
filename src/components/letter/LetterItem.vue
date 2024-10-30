@@ -1,4 +1,6 @@
 <script>
+import FinanceDataService from "../../services/FinanceDataService.js";
+
 export default {
   props: {
     letter: {
@@ -7,11 +9,25 @@ export default {
     }
   },
   methods: {
+    fetchLetter() {
+      FinanceDataService.getLetra(this.LetterModel.id)
+          .then(response => {
+            this.letter = response.data;
+          })
+          .catch(error => {
+            console.error('Error fetching letter:', error);
+          });
+    },
     viewDetails() {
       if (this.letter) {
         alert(`Detalles de la letra:\nNúmero: ${this.letter.number}\nFecha: ${this.letter.date}\nMonto: ${this.letter.amount}\nEstado: ${this.letter.status}`);
       }
-    }
+    },
+    mounted() {
+      if (this.letter) {
+        this.fetchLetter();
+      }
+  }
   }
 };
 </script>
