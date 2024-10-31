@@ -86,8 +86,8 @@ class FinanceDataService {
         return http.post(`/wallet/costes-gastos`, data);
     }
 
-    createResultadosConsulta(data) {
-        return http.post(`/wallet/resultados/consulta`, data);
+    createResultadosConsulta() {
+        return http.post(`/wallet/resultados/consulta`);
     }
 
     getAllResultadosConsulta() {

@@ -2,10 +2,14 @@
 import LetterInformation from '../../components/letter/LetterInformation.vue';
 import RateAndTermInformation from '../../components/RateAndTerm/RateAndTermInformation.vue';
 import CostsAndExpensesInformation from '../../components/costsAndExpenses/CostsAndExpensesInformation.vue';
+import QueryResults from "../../components/results/QueryResults.vue";
+import MainMenu from "../../components/Menu.vue";
 
 export default {
   name: 'DocumentLetter',
   components: {
+    MainMenu,
+    QueryResults,
     LetterInformation,
     RateAndTermInformation,
     CostsAndExpensesInformation
@@ -27,6 +31,11 @@ export default {
 </script>
 
 <template id="app">
+  <Card>
+  <template #header>
+    <MainMenu/>
+  </template>
+  </Card>
   <div class="p-grid p-nogutter equal-height">
     <div class="p-col-12 p-md-6">
       <!-- Rate And Term Information -->
@@ -44,6 +53,11 @@ export default {
     </div>
   </div>
   <Button @click="submitAll" label="Agregar Letra" class="submit-button" />
+  <div class="p-grid p-nogutter">
+    <div class="p-col-12">
+      <QueryResults/>
+    </div>
+  </div>
 </template>
 
 

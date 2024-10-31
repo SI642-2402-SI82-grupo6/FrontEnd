@@ -6,7 +6,7 @@
       <select v-model="menuSeleccionado" @change="navigateToMenu" class="form-control" id="menu">
         <option v-for="menu in menus" :key="menu" :value="menu">{{ menu }}</option>
       </select>
-      <pv-button @click.prevent="logout" class="button">Cerrar Sesión</pv-button>
+      <Button @click.prevent="logout" class="button">Cerrar Sesión</Button>
     </div>
   </div>
 </template>
@@ -68,7 +68,7 @@ body {
 }
 
 h2 {
-  color: #fff;
+  color: #000;
   font-size: 24px;
   margin-bottom: 20px;
 }
@@ -80,7 +80,7 @@ h2 {
 label {
   font-size: 20px;
   font-weight: bold;
-  color: #ffffff;
+  color: #000;
   margin-bottom: 10px;
   display: block;
 }
