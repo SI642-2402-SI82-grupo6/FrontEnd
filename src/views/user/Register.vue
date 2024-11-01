@@ -4,23 +4,45 @@
       <a @click="goToLogin">¿Tienes una cuenta? Inicia sesion</a>
     </div>
 
-    <form @submit.prevent="handleRegister">
+    <Form v-slot="$form" :resolver="resolver" :initial-values="initialValues"  @submit.prevent="handleRegister">
       <h2>Register</h2>
       <img src="../../assets/logo.png" alt="Logo" class="login-image">
-      <div class="input-group">
-        <i class="fas fa-user"></i>
-        <input type="text" v-model="username" placeholder="Username" required>
-      </div>
-      <div class="input-group">
-        <i class="fas fa-envelope"></i>
-        <input type="email" v-model="email" placeholder="Email" required>
-      </div>
-      <div class="input-group">
-        <i class="fas fa-lock"></i>
-        <input type="password" v-model="password" placeholder="Password" required>
-      </div>
+      <div class="flex flex-column row-gap-6" >
+        <InputGroup>
+          <InputGroupAddon>
+            <i class="pi pi-user"></i>
+          </InputGroupAddon>
+          <InputText v-model="username" placeholder="Username"  class="input-field username-field" />
+        </InputGroup>
+        <InputGroup>
+          <InputGroupAddon>
+            <i class="pi pi-at"></i>
+          </InputGroupAddon>
+          <InputText v-model="email" placeholder="Email"  class="input-field username-field" />
+        </InputGroup>
+        <InputGroup>
+          <InputGroupAddon>
+            <i class="pi pi-lock"></i>
+          </InputGroupAddon>
+          <Password v-model="password" placeholder="Password">
+            <template #header>
+              <div class="font-semibold text-xm mb-4">Pick a password</div>
+            </template>
+            <template #footer>
+              <Divider />
+              <ul class="pl-2 ml-2 my-0 leading-normal">
+                <li>At least one lowercase</li>
+                <li>At least one uppercase</li>
+                <li>At least one numeric</li>
+                <li>Minimum 8 characters</li>
+              </ul>
+            </template>
+          </Password>
+        </InputGroup>
+
       <button type="submit" class="register-btn">REGISTER</button>
-    </form>
+      </div>
+    </Form>
 
   </div>
 
@@ -30,7 +52,8 @@
 import {ref} from 'vue';
 import {useRouter} from 'vue-router';
 import FinanceDataService from '../../services/FinanceDataService';
-
+import {zodResolver} from "@hookform/resolvers/zod";
+import { z } from 'zod';
 export default {
   name: 'UserRegister',
   setup() {
@@ -55,6 +78,19 @@ export default {
         alert('Registration failed');
       }
     };
+    const initialValues = {
+      username: '',
+      email: '',
+      password: ''
+    };
+
+    const resolver = ref(zodResolver(
+        z.object({
+          username: z.string().min(1, { message: 'Username is required.' }),
+          email: z.string().min(1, { message: 'Email is required.' }).email({ message: 'Invalid email address.' }),
+          password: z.string().min(1, { message: 'Password is required.' }),
+        })
+    ));
 
     const goToLogin = () => {
       router.push('/login');
@@ -66,14 +102,16 @@ export default {
       roles,
       password,
       handleRegister,
-      goToLogin
+      goToLogin,
+      initialValues,
+      resolver,
     };
   }
 };
 </script>
 
 <style scoped>
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+@import url('primeicons/primeicons.css');
 
 * {
   margin: 0;
@@ -106,10 +144,7 @@ h2 {
   color: #fff;
 }
 
-.input-group {
-  position: relative;
-  margin-bottom: 20px;
-}
+
 
 .input-group i {
   position: absolute;
@@ -167,6 +202,22 @@ h2 {
 }
 
 
+.input-field {
+  width: 100%;
+  padding: 12px 40px;
+  background-color: white;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  height: 40px;
+
+}
+
+.username-field {
+  border: 1px solid lightgray;
+  text-align: left; /* Align text to the left */
+  padding-left: 10px; /* Ensure text is not too close to the border */
+}
 
 
 ::placeholder {
