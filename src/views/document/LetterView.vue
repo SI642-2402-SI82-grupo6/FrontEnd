@@ -1,7 +1,7 @@
 <script>
 import LetterInformation from '../../components/letter/LetterInformation.vue';
 import RateAndTermInformation from '../../components/RateAndTerm/RateAndTermInformation.vue';
-import CostsAndExpensesInformation from '../../components/costsAndExpenses/CostsAndExpensesInformation.vue';
+import CostsAndExpensesInformation from '../../components/costsAndExpenses/costsAndExpensesInformation.vue';
 import QueryResults from "../../components/results/QueryResults.vue";
 import MainMenu from "../../components/Menu.vue";
 
