@@ -23,7 +23,7 @@
         <a @click.prevent="goToRegister">¿No tienes una cuenta? Crea una nueva cuenta</a>
       </div>
       <Button type="submit" label="LOGIN" class="login-btn" />
-    </form>
+    </Form>
   </div>
 </template>
 <script >

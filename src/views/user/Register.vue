@@ -1,10 +1,9 @@
 <template>
   <div class="register-container">
-    <div class="login-btn">
-      <a @click="goToLogin">¿Tienes una cuenta? Inicia sesion</a>
-    </div>
-
     <Form v-slot="$form" :resolver="resolver" :initial-values="initialValues"  @submit.prevent="handleRegister">
+      <div class="login-btn">
+        <a @click="goToLogin">¿Tienes una cuenta? Inicia sesion</a>
+      </div>
       <h2>Register</h2>
       <img src="../../assets/logo.png" alt="Logo" class="login-image">
       <div class="flex flex-column row-gap-6" >
@@ -122,21 +121,23 @@ export default {
 }
 
 body {
+  background: url('../../assets/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  height: 100vh;
+  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background: linear-gradient(135deg, #1e3c72, #2a5298, #f093fb);
 }
 
 .register-container {
-  background-color: rebeccapurple;
   padding: 40px;
   border-radius: 10px;
   backdrop-filter: blur(10px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   text-align: center;
-  width: 500px;
+  width: 400px;
+  max-width: 100%;
+  background-color: rgba(128, 0, 128, 0.8);
 }
 
 h2 {
@@ -229,10 +230,9 @@ select option {
 }
 
 .login-image {
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
   margin-bottom: 20px;
   object-fit: contain;
-  border-radius: 20px;
 }
 </style>
