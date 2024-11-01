@@ -1,35 +1,60 @@
 <template>
   <div class="login-container">
-    <form @submit.prevent="handleLogin">
+    <Form v-slot="$form" :resolver="resolver" :initial-values="initialValues"  @submit.prevent="handleLogin" >
       <h2>Login</h2>
-      <img src="../../assets/logo.png" alt="Logo" class="login-image">
-      <div class="input-group">
-        <i class="fas fa-user"></i>
-        <input type="text" v-model="username" placeholder="Username" required>
-      </div>
-      <div class="input-group">
-        <i class="fas fa-lock"></i>
-        <input type="password" v-model="password" placeholder="Password" required>
+      <img src="../../assets/logo.png" alt="Logo" class="login-image" />
+      <div class="flex flex-column row-gap-6">
+
+        <InputGroup>
+          <InputGroupAddon>
+            <i class="pi pi-user"></i>
+          </InputGroupAddon>
+          <InputText v-model="username" placeholder="Username"  class="input-field username-field" />
+        </InputGroup>
+        <InputGroup>
+          <InputGroupAddon>
+            <i class="pi pi-lock"></i>
+          </InputGroupAddon>
+          <Password v-model="password" placeholder="Password" input-class="input-field" />
+        </InputGroup>
+
       </div>
       <div class="remember-register">
         <a @click.prevent="goToRegister">¿No tienes una cuenta? Crea una nueva cuenta</a>
       </div>
-      <button type="submit" class="login-btn">LOGIN</button>
+      <Button type="submit" label="LOGIN" class="login-btn" />
     </form>
   </div>
 </template>
+<script >
 
-<script>
-
+import {zodResolver} from '@hookform/resolvers/zod';
+import InputGroup from "primevue/inputgroup";
+import InputGroupAddon from "primevue/inputgroupaddon";
+import InputText from "primevue/inputtext";
 import AuthService from '../../services/AuthService'
+import {z} from "zod";
 export default {
   name: 'UserLogin',
   data() {
     return {
+      initialValues: {
+        username: '',
+        password: ''
+      },
+      resolver: zodResolver(
+          z.object({
+        username: z.string().min(1, 'Username is required'),
+        password: z.string().min(1, 'Password is required')
+      })
+      ),
       username: '',
       password: ''
+
     }
-  },
+    },
+
+
   methods: {
     async handleLogin() {
       const data = {
@@ -51,8 +76,9 @@ export default {
 }
 </script>
 
+
 <style scoped>
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+@import url('primeicons/primeicons.css');
 
 * {
   margin: 0;
@@ -60,6 +86,7 @@ export default {
   box-sizing: border-box;
   font-family: Arial, sans-serif;
 }
+
 
 body {
   background: url('../../assets/background.jpg') no-repeat center center fixed;
@@ -76,8 +103,9 @@ body {
   border-radius: 10px;
   backdrop-filter: blur(10px);
   text-align: center;
-  width: 500px;
-  background-color: rgba(128, 0, 128, 0.8); /* Color de fondo semitransparente */
+  width: 400px;
+  max-width: 100%;
+  background-color: rgba(128, 0, 128, 0.8);
 }
 
 .login-container form {
@@ -89,7 +117,7 @@ body {
   margin-bottom: 20px;
 }
 
-.input-group i {
+.input-group .icon {
   position: absolute;
   left: 10px;
   top: 50%;
@@ -97,25 +125,30 @@ body {
   color: #1a1a1a;
 }
 
-.input-group input {
+.input-field {
   width: 100%;
-  padding: 10px 40px;
-  background-color: rgba(255, 255, 255, 0.8);
+  padding: 12px 40px;
+  background-color: white;
   border: none;
-  border-radius: 30px;
   outline: none;
   font-size: 14px;
-  color: #333;
+  height: 40px;
+
 }
+
+.username-field {
+  border: 1px solid lightgray;
+  text-align: left; /* Align text to the left */
+  padding-left: 10px; /* Ensure text is not too close to the border */
+}
+
 
 .remember-register {
-  display: flex;
-  justify-content: space-between;
+  margin-top: 20px; /* Add 5px margin above */
   margin-bottom: 20px;
-  font-size: 20px;
+  font-size: 14px;
   color: #ffffff;
 }
-
 .remember-register a {
   color: #ffffff;
   text-decoration: none;
@@ -139,16 +172,21 @@ body {
 .login-btn:hover {
   background-color: #555;
 }
+password.input-field {
+  background-color: transparent;
 
-::placeholder {
-  color: #aaa;
+  border-radius: 5px;
+  margin: 10px 0;
+  padding: 5px;
+  width: 100%;
 }
 
+
+
 .login-image {
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
   margin-bottom: 20px;
   object-fit: contain;
-  border-radius: 20px;
 }
 </style>
