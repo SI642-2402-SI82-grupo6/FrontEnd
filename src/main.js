@@ -1,6 +1,5 @@
 import "primeflex/primeflex.css";
 import "primevue/resources/themes/lara-light-teal/theme.css";
-import "primevue/resources/primevue.min.css"; /* Deprecated */
 import "primeicons/primeicons.css";
 import "./style.css";
 import "./flags.css";
@@ -106,7 +105,6 @@ import TreeSelect from 'primevue/treeselect';
 import TreeTable from 'primevue/treetable';
 import TriStateCheckbox from 'primevue/tristatecheckbox';
 import VirtualScroller from 'primevue/virtualscroller';
-
 
 const app = createApp(App);
 router.beforeEach((to, from, next) => {
