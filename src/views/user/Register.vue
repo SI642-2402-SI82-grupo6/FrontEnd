@@ -11,7 +11,7 @@
           <InputGroupAddon>
             <i class="pi pi-user"></i>
           </InputGroupAddon>
-          <InputText v-model="username" placeholder="Username"  class="input-field username-field" />
+          <InputText  v-model="username" placeholder="Username"  class="input-field username-field" />
         </InputGroup>
         <InputGroup>
           <InputGroupAddon>
@@ -51,7 +51,7 @@
 import {ref} from 'vue';
 import {useRouter} from 'vue-router';
 import FinanceDataService from '../../services/FinanceDataService';
-import {zodResolver} from "@hookform/resolvers/zod";
+import { zodResolver } from '@primeuix/forms/resolvers/zod';
 import { z } from 'zod';
 export default {
   name: 'UserRegister',
