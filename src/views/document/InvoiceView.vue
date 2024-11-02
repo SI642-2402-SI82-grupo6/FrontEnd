@@ -3,10 +3,14 @@ import InvoiceItem from "../../components/invoice/InvoiceItem.vue";
 import CostsAndExpensesInformation from "../../components/costsAndExpenses/costsAndExpensesInformation.vue";
 import InvoiceInformation from "../../components/invoice/InvoiceInformation.vue";
 import RateAndTermInformation from "../../components/RateAndTerm/RateAndTermInformation.vue";
+import QueryResults from "../../components/results/QueryResults.vue";
+import MainMenu from "../../components/Menu.vue";
 
 export default {
   name: 'DocumentInvoice',
   components: {
+    MainMenu,
+    QueryResults,
     InvoiceInformation,
     RateAndTermInformation,
     CostsAndExpensesInformation
@@ -29,6 +33,11 @@ export default {
 
 
   <template id="app">
+    <Card>
+      <template #header>
+        <MainMenu/>
+      </template>
+    </Card>
     <div class="p-grid p-nogutter equal-height">
       <div class="p-col-12 p-md-4">
         <!-- Rate And Term Information -->
@@ -46,7 +55,12 @@ export default {
         <CostsAndExpensesInformation ref="costsAndExpensesInfo" />
       </div>
     </div>
-    <Button @click="submitAll" label="Agregar Letra" class="submit-button" />
+    <Button @click="submitAll" label="Agregar factura" class="submit-button" />
+    <div class="p-grid p-nogutter">
+      <div class="p-col-12">
+        <QueryResults/>
+      </div>
+    </div>
   </template>
 
 
