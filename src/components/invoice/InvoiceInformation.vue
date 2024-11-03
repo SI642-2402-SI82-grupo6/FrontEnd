@@ -1,12 +1,8 @@
 <script >
 import FinanceDataService from '../../services/FinanceDataService.js';
-import Form from '@primevue/forms/form/Form.vue';
-
+import { reactive } from 'vue';
 export default {
   name: 'InvoiceInformation',
-  components: {
-    Form
-  },
   data() {
     return {
       invoice: {
@@ -35,6 +31,9 @@ export default {
 
     <template #content>
       <h3>Invoice Information</h3>
+      <div class="card flex justify-center">
+        <Toast />
+
       <Form @submit.prevent="submitInvoice">
         <div class="p-field">
           <label for="fechaEmision">Fecha Emision:</label>
@@ -56,6 +55,7 @@ export default {
         </div>
 
       </Form>
+      </div>
     </template>
   </Card>
 </template>
