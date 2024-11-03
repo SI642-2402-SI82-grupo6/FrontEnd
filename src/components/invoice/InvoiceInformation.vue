@@ -1,6 +1,6 @@
 <script >
 import FinanceDataService from '../../services/FinanceDataService.js';
-
+import Form from '@primevue/forms';
 export default {
   name: 'InvoiceInformation',
   data() {
@@ -31,7 +31,7 @@ export default {
 
     <template #content>
       <h3>Invoice Information</h3>
-      <form @submit.prevent="submitInvoice">
+      <Form @submit.prevent="submitInvoice">
         <div class="p-field">
           <label for="fechaEmision">Fecha Emision:</label>
           <Calendar  id="fechaEmision" v-model="invoice.fechaEmision" required></Calendar >
@@ -51,7 +51,7 @@ export default {
                         :maxFractionDigits="4" required></InputNumber>
         </div>
 
-      </form>
+      </Form>
     </template>
   </Card>
 </template>
