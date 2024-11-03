@@ -88,14 +88,7 @@ export default {
 </script>
 
 <style scoped>
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  width: 100%;
-}
+
 
 label {
   font-weight: bold;
