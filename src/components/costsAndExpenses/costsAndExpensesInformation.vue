@@ -62,7 +62,7 @@
               :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
           >
             <DataTable :value="costesGastos" class="text-surface-500 dark:text-surface-400 block mb-8">
-              <Column field="tipoGasto" header="Tipo de Gasto"></Column>
+              <Column field="tipoGasto.label" header="Tipo de Gasto"></Column>
               <Column field="motivoGasto" header="Motivo de Gasto"></Column>
               <Column field="valorExpresado.valor" header="Valor Expresado"></Column>
             </DataTable>
