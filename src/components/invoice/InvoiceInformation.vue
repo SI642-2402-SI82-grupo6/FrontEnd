@@ -36,42 +36,54 @@ export default {
 
         <Form @submit.prevent="submitInvoice">
           <div class="p-grid p-fluid">
-            <label for="fechaEmision">Fecha Emisión:</label>
-            <div class="p-field p-col-12 p-md-6">
-
-              <Calendar id="fechaEmision" v-model="invoice.fechaEmision" required></Calendar>
+            <!-- Fecha Emisión -->
+            <div class="p-field p-col-12 p-md-6 p-formgrid p-fluid">
+              <label for="fechaEmision" class="p-col-fixed" style="width: 120px;">Fecha Emisión:</label>
+              <div class="p-col">
+                <Calendar id="fechaEmision" v-model="invoice.fechaEmision" required></Calendar>
+              </div>
             </div>
-            <label for="fechaPago">Fecha Pago:</label>
-            <div class="p-field p-col-12 p-md-6">
 
-              <Calendar id="fechaPago" v-model="invoice.fechaPago" required></Calendar>
+            <!-- Fecha Pago -->
+            <div class="p-field p-col-12 p-md-6 p-formgrid p-fluid">
+              <label for="fechaPago" class="p-col-fixed" style="width: 120px;">Fecha Pago:</label>
+              <div class="p-col">
+                <Calendar id="fechaPago" v-model="invoice.fechaPago" required></Calendar>
+              </div>
             </div>
-            <label for="totalFacturado">Total Facturado:</label>
-            <div class="p-field p-col-12 p-md-6">
 
-              <InputNumber
-                  id="totalFacturado"
-                  v-model="invoice.totalFacturado"
-                  mode="decimal"
-                  :minFractionDigits="0"
-                  :maxFractionDigits="4"
-                  required
-              ></InputNumber>
+            <!-- Total Facturado -->
+            <div class="p-field p-col-12 p-md-6 p-formgrid p-fluid">
+              <label for="totalFacturado" class="p-col-fixed" style="width: 120px;">Total Facturado:</label>
+              <div class="p-col">
+                <InputNumber
+                    id="totalFacturado"
+                    v-model="invoice.totalFacturado"
+                    mode="decimal"
+                    :minFractionDigits="0"
+                    :maxFractionDigits="4"
+                    required
+                ></InputNumber>
+              </div>
             </div>
-            <label for="retencion">Retención:</label>
-            <div class="p-field p-col-12 p-md-6">
 
-              <InputNumber
-                  id="retencion"
-                  v-model="invoice.retencion"
-                  mode="decimal"
-                  :minFractionDigits="0"
-                  :maxFractionDigits="4"
-                  required
-              ></InputNumber>
+            <!-- Retención -->
+            <div class="p-field p-col-12 p-md-6 p-formgrid p-fluid">
+              <label for="retencion" class="p-col-fixed" style="width: 120px;">Retención:</label>
+              <div class="p-col">
+                <InputNumber
+                    id="retencion"
+                    v-model="invoice.retencion"
+                    mode="decimal"
+                    :minFractionDigits="0"
+                    :maxFractionDigits="4"
+                    required
+                ></InputNumber>
+              </div>
             </div>
           </div>
         </Form>
+
 
       </div>
     </template>
