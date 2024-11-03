@@ -116,11 +116,8 @@ export default {
     'costsAndExpenses.valorExpresado.esPorcentaje'(newValue) {
       this.currencySymbol = newValue ? '%' : '$';
     },
-    visible(newValue) {
-      if (newValue) {
-        this.fetchCostesGastos();
-      }
-    }
+
+
   },
   methods: {
     storeCostsAndExpenses() {
