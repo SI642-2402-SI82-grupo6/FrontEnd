@@ -1,9 +1,12 @@
 <script >
 import FinanceDataService from '../../services/FinanceDataService.js';
-import { Form } from '@primevue/forms';
+import Form from '@primevue/forms/form/Form.vue';
 
 export default {
   name: 'InvoiceInformation',
+  components: {
+    Form
+  },
   data() {
     return {
       invoice: {
