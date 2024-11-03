@@ -27,57 +27,89 @@ export default {
 </script>
 
 <template>
-  <Card title="letterInformation">
-
+  <Card title="Letter Information">
     <template #content>
-      <h3>Informacion Letra</h3>
-    <form @submit.prevent="submitLetter">
-      <div class="p-field">
-        <label class="m-0">Fecha Giro:</label>
-        <Calendar id="fechaGiro" v-model="letter.fechaGiro" required />
-      </div>
-      <div class="p-field">
-        <label class="m-0" >Fecha Vencimiento:</label>
-        <Calendar id="fechaVencimiento" v-model="letter.fechaVencimiento" required />
-      </div>
-      <div class="p-field">
-        <label class="m-0">Valor Nominal:</label>
-        <InputNumber  id="valorNominal" v-model="letter.valorNominal" mode="decimal"               :minFractionDigits="0"
-                      :maxFractionDigits="4" required />
-      </div>
-      <div class="p-field">
-        <label class="m-0">Retencion:</label>
-        <InputNumber id="retencion" v-model="letter.retencion" mode="decimal"               :minFractionDigits="0"
-                     :maxFractionDigits="4" required />
-      </div>
-    </form>
+      <h3>Información de la Letra</h3>
+      <form @submit.prevent="submitLetter" class="form-container">
+        <div class="p-field field-inline">
+          <label for="fechaGiro">Fecha Giro:</label>
+          <Calendar id="fechaGiro" v-model="letter.fechaGiro" required class="input-same-width"/>
+        </div>
+
+        <div class="p-field field-inline">
+          <label for="fechaVencimiento">Fecha Vencimiento:</label>
+          <Calendar id="fechaVencimiento" v-model="letter.fechaVencimiento" required class="input-same-width"/>
+        </div>
+
+        <div class="p-field field-inline">
+          <label for="valorNominal">Valor Nominal:</label>
+          <InputNumber
+              id="valorNominal"
+              v-model="letter.valorNominal"
+              mode="decimal"
+              :minFractionDigits="0"
+              :maxFractionDigits="4"
+              required
+              class="input-same-width"
+          />
+        </div>
+
+        <div class="p-field field-inline">
+          <label for="retencion">Retención:</label>
+          <InputNumber
+              id="retencion"
+              v-model="letter.retencion"
+              mode="decimal"
+              :minFractionDigits="0"
+              :maxFractionDigits="4"
+              required
+              class="input-same-width"
+          />
+        </div>
+
+        <button type="submit" class="submit-button">Guardar</button>
+      </form>
     </template>
   </Card>
 </template>
 
 <style scoped>
-form {
-
-
+.form-container {
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
 }
 
-label {
+.field-inline {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.field-inline label {
+  min-width: 150px;
+  text-align: right;
   font-weight: bold;
 }
 
-input {
-  padding: 0.5rem;
-  font-size: 1rem;
+/* Clase para hacer que todos los inputs tengan el mismo ancho */
+.input-same-width {
+  width: 100%;
+  max-width: 300px; /* Ajusta este ancho según el diseño que desees */
 }
 
-button {
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  cursor: pointer;
-}
 h3 {
   text-align: center;
   width: 100%;
+  font-size: 1.5rem;
+}
+label{
+  font-weight: bold;
+}
+.submit-button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  align-self: center;
 }
 </style>

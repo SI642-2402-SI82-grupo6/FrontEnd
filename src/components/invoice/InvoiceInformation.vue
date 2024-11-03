@@ -91,7 +91,9 @@ export default {
   align-items: center;
   gap: 1rem;
 }
-
+label {
+  font-weight: bold;
+}
 .field-inline label {
   min-width: 120px;
   text-align: right;
