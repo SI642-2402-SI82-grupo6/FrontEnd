@@ -36,16 +36,19 @@ export default {
 
         <Form @submit.prevent="submitInvoice">
           <div class="p-grid p-fluid">
+            <label for="fechaEmision">Fecha Emisión:</label>
             <div class="p-field p-col-12 p-md-6">
-              <label for="fechaEmision">Fecha Emisión:</label>
+
               <Calendar id="fechaEmision" v-model="invoice.fechaEmision" required></Calendar>
             </div>
+            <label for="fechaPago">Fecha Pago:</label>
             <div class="p-field p-col-12 p-md-6">
-              <label for="fechaPago">Fecha Pago:</label>
+
               <Calendar id="fechaPago" v-model="invoice.fechaPago" required></Calendar>
             </div>
+            <label for="totalFacturado">Total Facturado:</label>
             <div class="p-field p-col-12 p-md-6">
-              <label for="totalFacturado">Total Facturado:</label>
+
               <InputNumber
                   id="totalFacturado"
                   v-model="invoice.totalFacturado"
@@ -55,8 +58,9 @@ export default {
                   required
               ></InputNumber>
             </div>
+            <label for="retencion">Retención:</label>
             <div class="p-field p-col-12 p-md-6">
-              <label for="retencion">Retención:</label>
+
               <InputNumber
                   id="retencion"
                   v-model="invoice.retencion"
