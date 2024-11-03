@@ -3,7 +3,7 @@ import LetterInformation from '../../components/letter/LetterInformation.vue';
 import RateAndTermInformation from '../../components/RateAndTerm/RateAndTermInformation.vue';
 import CostsAndExpensesInformation from '../../components/costsAndExpenses/costsAndExpensesInformation.vue';
 import QueryResults from "../../components/results/QueryResults.vue";
-import MainMenu from "../../components/Menu.vue";
+import MainMenu from "../../components/MainMenu.vue";
 
 export default {
   name: 'DocumentLetter',
@@ -31,11 +31,7 @@ export default {
 </script>
 
 <template id="app">
-  <Card>
-  <template #header>
-    <MainMenu/>
-  </template>
-  </Card>
+
   <div class="p-grid p-nogutter equal-height">
     <div class="p-col-12 p-md-6">
       <!-- Rate And Term Information -->

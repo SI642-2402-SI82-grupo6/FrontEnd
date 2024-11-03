@@ -1,24 +1,18 @@
 <script >
-import MainMenu from "../../components/Menu.vue";
-
+import MainMenuVue from "../../components/MainMenu.vue";
 
 export default {
   name: 'HomeHome',
-  components: {MainMenu}
+  components: {
+    MainMenuVue
+  },
+
 }
 </script>
 
 <template>
 
-  <div class="home-container">
-    <div class="main-menu">
-      <MainMenu/>
-    </div>
-    
-    <div class="content">
-      <h1>Home</h1>
-    </div>
-  </div>
+
 </template>
 
 <style scoped>

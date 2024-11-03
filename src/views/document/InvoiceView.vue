@@ -4,7 +4,7 @@ import CostsAndExpensesInformation from "../../components/costsAndExpenses/costs
 import InvoiceInformation from "../../components/invoice/InvoiceInformation.vue";
 import RateAndTermInformation from "../../components/RateAndTerm/RateAndTermInformation.vue";
 import QueryResults from "../../components/results/QueryResults.vue";
-import MainMenu from "../../components/Menu.vue";
+import MainMenu from "../../components/MainMenu.vue";
 
 export default {
   name: 'DocumentInvoice',
@@ -33,11 +33,7 @@ export default {
 
 
   <template id="app">
-    <Card>
-      <template #header>
-        <MainMenu/>
-      </template>
-    </Card>
+
     <div class="p-grid p-nogutter equal-height">
       <div class="p-col-12 p-md-4">
         <!-- Rate And Term Information -->

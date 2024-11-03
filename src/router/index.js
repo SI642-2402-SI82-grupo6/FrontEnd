@@ -4,7 +4,9 @@ import Register from '../views/user/Register.vue';
 import Home from "../views/home/Home.vue";
 import InvoiceView from "../views/document/InvoiceView.vue";
 import LetterView from "../views/document/LetterView.vue";
-
+import About from "../views/home/About.vue";
+import Contact from "../views/home/Contact.vue";
+import Services from "../views/home/Services.vue";
 function isAuthenticated() {
   const user = JSON.parse(localStorage.getItem('user'));
   console.log('User:', user); // Verify the user
@@ -43,7 +45,24 @@ const routes = [
     name: 'letter',
     component: LetterView,
     meta: { requiresAuth: true }
-  }
+  },
+    {
+      path: '/about',
+      name: 'about',
+      component: About,
+
+    },
+    {
+      path: '/contact',
+      name: 'contact',
+      component: Contact,
+    },
+    {
+      path: '/services',
+      name: 'services',
+      component: Services,
+
+    }
 ];
 
 const router = createRouter({
