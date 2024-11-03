@@ -1,6 +1,6 @@
 <script>
 import FinanceDataService from '../../services/FinanceDataService.js';
-
+import { reactive } from 'vue';
 export default {
   name: 'LetterInformation',
   data() {
@@ -30,7 +30,7 @@ export default {
   <Card title="Letter Information">
     <template #content>
       <h3>Información de la Letra</h3>
-      <form @submit.prevent="submitLetter" class="form-container">
+      <Form @submit.prevent="submitLetter" class="form-container">
         <div class="p-field field-inline">
           <label for="fechaGiro">Fecha Giro:</label>
           <Calendar id="fechaGiro" v-model="letter.fechaGiro" required class="input-same-width"/>
@@ -66,9 +66,7 @@ export default {
               class="input-same-width"
           />
         </div>
-
-        <button type="submit" class="submit-button">Guardar</button>
-      </form>
+      </Form>
     </template>
   </Card>
 </template>
