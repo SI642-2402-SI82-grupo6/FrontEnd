@@ -10,13 +10,13 @@
             <!-- Fecha Emisión -->
             <div class="p-field p-col-12 p-md-6 field-inline">
               <label for="fechaEmision">Fecha Emisión:</label>
-              <Calendar id="fechaEmision" v-model="invoice.fechaEmision" required></Calendar>
+              <Calendar id="fechaEmision" v-model="invoice.fechaEmision" required class="input-same-width"></Calendar>
             </div>
 
             <!-- Fecha Pago -->
             <div class="p-field p-col-12 p-md-6 field-inline">
               <label for="fechaPago">Fecha Pago:</label>
-              <Calendar id="fechaPago" v-model="invoice.fechaPago" required></Calendar>
+              <Calendar id="fechaPago" v-model="invoice.fechaPago" required class="input-same-width"></Calendar>
             </div>
 
             <!-- Total Facturado -->
@@ -29,6 +29,7 @@
                   :minFractionDigits="0"
                   :maxFractionDigits="4"
                   required
+                  class="input-same-width"
               ></InputNumber>
             </div>
 
@@ -42,11 +43,13 @@
                   :minFractionDigits="0"
                   :maxFractionDigits="4"
                   required
+                  class="input-same-width"
               ></InputNumber>
             </div>
 
           </div>
         </Form>
+
 
       </div>
     </template>
@@ -86,11 +89,18 @@ export default {
 .field-inline {
   display: flex;
   align-items: center;
-  gap: 1rem; /* Espacio entre el label y el input */
+  gap: 1rem;
 }
 
 .field-inline label {
-  min-width: 120px; /* Ancho mínimo para alinear los labels */
-  text-align: right; /* Alineación del texto del label */
+  min-width: 120px;
+  text-align: right;
+}
+
+/* Establece un ancho uniforme para Calendar y InputNumber */
+.input-same-width {
+  width: 100%; /* Asegura que todos ocupen el mismo ancho disponible */
+  max-width: 300px; /* Puedes ajustar este valor según el diseño deseado */
 }
 </style>
+
