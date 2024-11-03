@@ -50,17 +50,20 @@ const routes = [
       path: '/about',
       name: 'about',
       component: About,
+      meta: { requiresAuth: true }
 
     },
     {
       path: '/contact',
       name: 'contact',
       component: Contact,
+      meta: { requiresAuth: true }
     },
     {
       path: '/services',
       name: 'services',
       component: Services,
+      meta: { requiresAuth: true }
 
     }
 ];
