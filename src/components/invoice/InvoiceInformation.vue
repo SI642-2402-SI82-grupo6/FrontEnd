@@ -34,27 +34,41 @@ export default {
       <div class="card flex justify-center">
         <Toast />
 
-      <Form @submit.prevent="submitInvoice">
-        <div class="p-field">
-          <label for="fechaEmision">Fecha Emision:</label>
-          <Calendar  id="fechaEmision" v-model="invoice.fechaEmision" required></Calendar >
-        </div>
-        <div class="p-field">
-          <label for="fechaPago">Fecha Pago:</label>
-          <Calendar  id="fechaPago" v-model="invoice.fechaPago" required></Calendar >
-        </div>
-        <div class="p-field">
-          <label for="totalFacturado">Total Facturado:</label>
-          <InputNumber  id="totalFacturado" v-model="invoice.totalFacturado" mode="decimal"               :minFractionDigits="0"
-                        :maxFractionDigits="4" required></InputNumber>
-        </div>
-        <div class="p-field">
-          <label for="retencion">Retencion:</label>
-          <InputNumber  id="retencion" v-model="invoice.retencion" mode="decimal"               :minFractionDigits="0"
-                        :maxFractionDigits="4" required></InputNumber>
-        </div>
+        <Form @submit.prevent="submitInvoice">
+          <div class="p-grid p-fluid">
+            <div class="p-field p-col-12 p-md-6">
+              <label for="fechaEmision">Fecha Emisión:</label>
+              <Calendar id="fechaEmision" v-model="invoice.fechaEmision" required></Calendar>
+            </div>
+            <div class="p-field p-col-12 p-md-6">
+              <label for="fechaPago">Fecha Pago:</label>
+              <Calendar id="fechaPago" v-model="invoice.fechaPago" required></Calendar>
+            </div>
+            <div class="p-field p-col-12 p-md-6">
+              <label for="totalFacturado">Total Facturado:</label>
+              <InputNumber
+                  id="totalFacturado"
+                  v-model="invoice.totalFacturado"
+                  mode="decimal"
+                  :minFractionDigits="0"
+                  :maxFractionDigits="4"
+                  required
+              ></InputNumber>
+            </div>
+            <div class="p-field p-col-12 p-md-6">
+              <label for="retencion">Retención:</label>
+              <InputNumber
+                  id="retencion"
+                  v-model="invoice.retencion"
+                  mode="decimal"
+                  :minFractionDigits="0"
+                  :maxFractionDigits="4"
+                  required
+              ></InputNumber>
+            </div>
+          </div>
+        </Form>
 
-      </Form>
       </div>
     </template>
   </Card>
