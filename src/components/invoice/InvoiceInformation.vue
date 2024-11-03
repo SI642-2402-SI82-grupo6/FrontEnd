@@ -1,6 +1,6 @@
 <script >
 import FinanceDataService from '../../services/FinanceDataService.js';
-import Form from '@primevue/forms';
+
 export default {
   name: 'InvoiceInformation',
   data() {
