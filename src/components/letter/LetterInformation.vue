@@ -33,20 +33,20 @@ export default {
       <h3>Informacion Letra</h3>
     <form @submit.prevent="submitLetter">
       <div class="p-field">
-        <p class="m-0">Fecha Giro:</p>
+        <label class="m-0">Fecha Giro:</label>
         <Calendar id="fechaGiro" v-model="letter.fechaGiro" required />
       </div>
       <div class="p-field">
-        <p class="m-0" >Fecha Vencimiento:</p>
+        <label class="m-0" >Fecha Vencimiento:</label>
         <Calendar id="fechaVencimiento" v-model="letter.fechaVencimiento" required />
       </div>
       <div class="p-field">
-        <p class="m-0">Valor Nominal:</p>
+        <label class="m-0">Valor Nominal:</label>
         <InputNumber  id="valorNominal" v-model="letter.valorNominal" mode="decimal"               :minFractionDigits="0"
                       :maxFractionDigits="4" required />
       </div>
       <div class="p-field">
-        <p class="m-0">Retencion:</p>
+        <label class="m-0">Retencion:</label>
         <InputNumber id="retencion" v-model="letter.retencion" mode="decimal"               :minFractionDigits="0"
                      :maxFractionDigits="4" required />
       </div>
