@@ -1,5 +1,6 @@
 <script setup>
 import sergioImage from '../../assets/sergio.png';
+import marioImage from '../../assets/mario.png';
 import MainMenuVue from "../../components/MainMenu.vue";
 import { ref } from 'vue';
 import Accordion from 'primevue/accordion';
@@ -58,7 +59,18 @@ const tabs = ref([
               content 1
             </AccordionTab>
             <AccordionTab header="Integrante 2">
-              content 1
+              <Accordion>
+                <AccordionTab header="Mario Joaquin Lopez Acuña">
+                  <div class="image-text-container">
+                    <Image :src="marioImage" alt="mario" width="100" />
+                    <div class="text-content">
+                      Hola, soy Mario Joaquin Lopez Acuña, un apasionado desarrollador de software con experiencia en el diseño y desarrollo de aplicaciones web y móviles. En Pyme Walt, mi enfoque principal es garantizar que cada funcionalidad de la aplicación sea intuitiva, eficiente y fácil de usar. Creo que la tecnología debe ser accesible para todos, y mi objetivo es crear soluciones que simplifiquen la vida de nuestros usuarios.
+                      Mi pasión por la programación comenzó desde temprana edad, y desde entonces he trabajado en una variedad de proyectos que van desde aplicaciones de comercio electrónico hasta sistemas de gestión de contenido. En Pyme Walt, tengo la oportunidad de combinar mi experiencia técnica con mi creatividad para ofrecer una experiencia de usuario excepcional.
+                      Siempre estoy buscando nuevas formas de mejorar y aprender, y me enorgullece formar parte de un equipo tan talentoso y diverso. Juntos, estamos creando una aplicación que cambiará la forma en que las empresas gestionan sus carteras de descuento de letras y facturas. ¡Gracias por visitarnos y espero que disfrutes de tu experiencia en Pyme Walt!
+                    </div>
+                    </div>
+                </AccordionTab>
+              </Accordion>
             </AccordionTab>
             <AccordionTab header="Integrante 3">
               content 1
