@@ -78,7 +78,7 @@
 import FinanceDataService from '../../services/FinanceDataService.js';
 import 'primeicons/primeicons.css';
 import { ref } from 'vue';
-
+import { toggleCurrency } from '../../utils/currencyUtils.js';
 export default {
   name: 'CostsAndExpensesInformation',
   data() {
@@ -140,7 +140,7 @@ export default {
       }
     },
     toggleCurrency() {
-      this.currencySymbol = this.currencySymbol === '$' ? 'S/.' : '$';
+      this.currencySymbol = toggleCurrency(this.currencySymbol);
     },
     async fetchCostesGastos() {
       try {
