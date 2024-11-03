@@ -1,6 +1,7 @@
 <script setup>
 import sergioImage from '../../assets/sergio.png';
 import marioImage from '../../assets/mario.png';
+import fabrizioImage from '../../assets/fabrizio.png';
 import MainMenuVue from "../../components/MainMenu.vue";
 import { ref } from 'vue';
 import Accordion from 'primevue/accordion';
@@ -56,7 +57,16 @@ const tabs = ref([
         <AccordionTab header="Integrates del equipo">
           <Accordion>
             <AccordionTab header="Integrante 1">
-              content 1
+              <Accordion>
+                <AccordionTab header="Fabrizio Amir Leon Vivas">
+                  <div class="image-text">
+                    <Image :src="fabrizioImage" alt="fabrizio" width="100" />
+                    <div class="text-content">
+                      Hola, soy Fabrizio Amir Leon Vivas, ingeniero de software de 20 años de Lima, Perú, y actualmente estoy cursando la carrera de Ingeniería de Software. Soy una persona enfocada en mejorar constantemente mis habilidades técnicas y académicas, siempre buscando aprender y aplicar nuevas tecnologías para crear soluciones efectivas. En los proyectos, me esfuerzo por mantener un enfoque estructurado y colaborativo, ya que sé que esto es clave para un desarrollo eficiente y para lograr resultados de alta calidad.
+                    </div>
+                  </div>
+                </AccordionTab>
+              </Accordion>
             </AccordionTab>
             <AccordionTab header="Integrante 2">
               <Accordion>
