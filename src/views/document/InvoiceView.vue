@@ -20,7 +20,7 @@ export default {
       try {
         await this.$refs.invoiceInfo.submitInvoice();
         await this.$refs.rateAndTermInfo.submitRateAndTerm();
-        await this.$refs.costsAndExpensesInfo.submitCostsAndExpenses();
+        await this.$refs.costsAndExpensesInfo.sendAllCostsAndExpenses();
         alert('All submissions successful');
       } catch (error) {
         console.error('Error submitting forms:', error);

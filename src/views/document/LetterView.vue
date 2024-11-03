@@ -19,7 +19,7 @@ export default {
       try {
         await this.$refs.letterInfo.submitLetter();
         await this.$refs.rateAndTermInfo.submitRateAndTerm();
-        await this.$refs.costsAndExpensesInfo.submitCostsAndExpenses();
+        await this.$refs.costsAndExpensesInfo.sendAllCostsAndExpenses();
         alert('All submissions successful');
       } catch (error) {
         console.error('Error submitting forms:', error);

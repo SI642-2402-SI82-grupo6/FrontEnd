@@ -50,7 +50,6 @@ export default {
         <InputNumber id="retencion" v-model="letter.retencion" mode="decimal"               :minFractionDigits="0"
                      :maxFractionDigits="4" required />
       </div>
-
     </form>
     </template>
   </Card>

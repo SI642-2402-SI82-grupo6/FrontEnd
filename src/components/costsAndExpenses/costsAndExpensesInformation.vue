@@ -1,9 +1,8 @@
 <template>
   <Card title="Gastos">
-
-    <template #content>{
+    <template #content>
       <h3>Agregar Gastos</h3>
-      <form @submit.prevent="submitCostsAndExpenses">
+      <form @submit.prevent="storeCostsAndExpenses">
         <div>
           <label for="tipoGasto" class="black-text">Tipo Gasto:</label>
           <Dropdown
@@ -31,10 +30,9 @@
               v-model="costsAndExpenses.valorExpresado.esPorcentaje"
               :binary="true"
           />
-
         </div>
         <div>
-          <label >Valor:</label>
+          <label>Valor:</label>
           <Button
               v-if="!costsAndExpenses.valorExpresado.esPorcentaje"
               type="button"
@@ -53,7 +51,7 @@
               required
           />
         </div>
-        <Button type="submit" class="black-text">Enviar</Button>
+        <Button type="submit" class="black-text">Guardar</Button>
         <div class="card flex justify-content-center">
           <Button label="Show" icon="pi pi-external-link" @click="visible = true" />
           <Dialog
@@ -63,15 +61,14 @@
               :style="{ width: '50rem' }"
               :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
           >
-            <DataTable :value="costesGastos"  class="text-surface-500 dark:text-surface-400 block mb-8">
-              <Column  field="tipoGasto" header="Tipo de Gasto"></Column>
+            <DataTable :value="costesGastos" class="text-surface-500 dark:text-surface-400 block mb-8">
+              <Column field="tipoGasto" header="Tipo de Gasto"></Column>
               <Column field="motivoGasto" header="Motivo de Gasto"></Column>
-              <Column  field="valorExpresado.valor" header="Valor Expresado"></Column>
+              <Column field="valorExpresado.valor" header="Valor Expresado"></Column>
             </DataTable>
           </Dialog>
           <Button label="Limpiar" icon="pi pi-times" @click="deleteCostesGastos" />
         </div>
-
       </form>
     </template>
   </Card>
@@ -82,10 +79,8 @@ import FinanceDataService from '../../services/FinanceDataService.js';
 import 'primeicons/primeicons.css';
 import { ref } from 'vue';
 
-
 export default {
   name: 'CostsAndExpensesInformation',
-
   data() {
     return {
       visible: false,
@@ -128,17 +123,23 @@ export default {
     }
   },
   methods: {
-    async submitCostsAndExpenses() {
+    storeCostsAndExpenses() {
+      this.costesGastos.push({ ...this.costsAndExpenses });
+      console.log('Stored data locally:', this.costesGastos);
+    },
+    async sendAllCostsAndExpenses() {
       try {
-        const dataToSend = {
-          ...this.costsAndExpenses,
-          tipoGasto: this.costsAndExpenses.tipoGasto.value
-        };
-        console.log('Data to be sent:', dataToSend); // Log the data being sent
-        const response = await FinanceDataService.createCostesGastos(dataToSend);
-        console.log('Costs and Expenses created:', response.data);
+        for (const item of this.costesGastos) {
+          const dataToSend = {
+            ...item,
+            tipoGasto: item.tipoGasto.value
+          };
+          const response = await FinanceDataService.createCostesGastos(dataToSend);
+          console.log('Costs and Expenses created:', response.data);
+        }
+        this.costesGastos = []; // Clear local storage after sending
       } catch (error) {
-        console.error('Error creating Costs and Expenses:', error.response || error.message);
+        console.error('Error sending Costs and Expenses:', error.response || error.message);
       }
     },
     toggleCurrency() {
@@ -150,23 +151,19 @@ export default {
         this.costesGastos = response.data;
         console.log('Fetched data:', this.costesGastos);
       } catch (error) {
-        // Asegúrate de que el error es significativo
         console.error('Error fetching Costs and Expenses:', error.response || error.message);
       }
     },
     async deleteCostesGastos() {
       try {
-        const response= await FinanceDataService.deleteCostesGastosAll();
+        const response = await FinanceDataService.deleteCostesGastosAll();
         console.log('Costs and Expenses deleted:', response.data);
       } catch (error) {
         console.error('Error deleting Costs and Expenses:', error.response || error.message);
       }
     }
-
-  },
-
+  }
 };
-
 </script>
 
 <style scoped>

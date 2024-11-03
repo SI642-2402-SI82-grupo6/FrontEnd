@@ -1,14 +1,13 @@
 <template>
   <Card title="Resultados de Consulta">
     <template #content>
-      <Button label="Consultar Resultados" icon="pi pi-search" @click="fetchResultadosCartera" />
+      <Button label="Consultar Resultados" icon="pi pi-search" @click="fetchResultados" />
       <div v-if="resultadosCartera.length">
         <DataTable :value="resultadosCartera">
           <Row field="valorTotalRecibir" header="Valor Total a Recibir"></Row>
           <Row field="tcea" header="TCEA"></Row>
         </DataTable>
       </div>
-      <Button label="Consultar Resultados" icon="pi pi-search" @click="fetchResultadosConsulta" />
       <div v-if="resultadosConsulta.length">
         <ResultItem v-for="result in resultadosConsulta" :key="result.id" :result="result" />
       </div>
@@ -31,22 +30,19 @@ export default {
     };
   },
   methods: {
-    async fetchResultadosConsulta() {
+    async fetchResultados() {
       try {
-        const response = await FinanceDataService.createResultadosConsulta();
-        this.resultadosConsulta = response.data;
+        const [consultaResponse, carteraResponse] = await Promise.all([
+          FinanceDataService.createResultadosConsulta(),
+          FinanceDataService.getResultadosCartera()
+        ]);
+
+        this.resultadosConsulta = consultaResponse.data;
+        this.resultadosCartera = carteraResponse.data;
         console.log('Fetched resultados consulta:', this.resultadosConsulta);
-      } catch (error) {
-        console.error('Error fetching resultados consulta:', error.response || error.message);
-      }
-    },
-    async fetchResultadosCartera() {
-      try {
-        const response = await FinanceDataService.getResultadosCartera();
-        this.resultadosCartera = response.data;
         console.log('Fetched resultados cartera:', this.resultadosCartera);
       } catch (error) {
-        console.error('Error fetching resultados cartera:', error.response || error.message);
+        console.error('Error fetching resultados:', error.response || error.message);
       }
     }
   }
