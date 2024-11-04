@@ -3,6 +3,7 @@ import sergioImage from '../../assets/sergio.png';
 import marioImage from '../../assets/mario.png';
 import fabrizioImage from '../../assets/fabrizio.png';
 import diegoImage from '../../assets/diegocabrerab.png';
+import bryan from '../../assets/bryan.jpeg';
 
 import { ref } from 'vue';
 import Accordion from 'primevue/accordion';
@@ -96,7 +97,11 @@ const tabs = ref([
               </Accordion>
             </AccordionTab>
             <AccordionTab header="Integrante 4">
-              content 1
+              <div class="image-text-container">
+                <Image :src="bryan" alt="bryan" width="100" />
+                <div class="text-content">
+                  Soy Bryan Rodolfo Ore Areche, estudiante de la carrera de ingeniería de sistemas de la información. Me gusta la automatización de procesos. Entre mis hobbies se encuentra la lectura                </div>
+              </div>
             </AccordionTab>
           </Accordion>
         </AccordionTab>
