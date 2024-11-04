@@ -2,6 +2,7 @@
 import sergioImage from '../../assets/sergio.png';
 import marioImage from '../../assets/mario.png';
 import fabrizioImage from '../../assets/fabrizio.png';
+import diegoImage from '../../assets/diegocabrerab.png';
 
 import { ref } from 'vue';
 import Accordion from 'primevue/accordion';
@@ -83,7 +84,16 @@ const tabs = ref([
               </Accordion>
             </AccordionTab>
             <AccordionTab header="Integrante 3">
-              content 1
+              <Accordion>
+                <AccordionTab header="Diego Ivan Cabrera Buitron">
+                  <div class="image-text-container">
+                    <Image :src="diegoImage" alt="diego" width="100" />
+                    <div class="text-content">
+                      Mi nombre es Diego Cabrera, estoy cursando la carrera de Ingeniería de Software, me considero una persona responsable y perseverante. Al culminar mi carrera quiero especializarme en el sector de la ciberseguridad
+                    </div>
+                  </div>
+                </AccordionTab>
+              </Accordion>
             </AccordionTab>
             <AccordionTab header="Integrante 4">
               content 1

@@ -1,7 +1,135 @@
+<template>
+  <Card>
+    <template #content>
+      <h3 class="move-right">Información de Tasa y Plazo</h3>
+      <div class="card flex justify-center move-right">
+        <Form @submit.prevent="submitRateAndTerm">
+          <div class="p-grid p-fluid">
+
+            <!-- Tipo de Tasa -->
+            <div class="p-field p-col-12 p-md-6 field-inline">
+              <label for="tipoTasa">
+                Tipo Tasa <i class="pi pi-info-circle"> :</i>
+              </label>
+              <Dropdown
+                  id="tipoTasa"
+                  v-model="rateAndTerm.tipoTasa"
+                  :options="tipoTasaOptions"
+                  placeholder="Seleccione tipo de tasa"
+                  required
+                  class="input-same-width"
+              />
+            </div>
+
+            <!-- Tasa Nominal -->
+            <div v-if="rateAndTerm.tipoTasa === 'NOMINAL'" class="p-field p-col-12 p-md-6 field-inline">
+              <label for="tasaNominal">
+                Tasa Nominal <i class="pi pi-percentage"> :</i>
+              </label>
+              <InputNumber
+                  mode="decimal"
+                  :minFractionDigits="0"
+                  :maxFractionDigits="4"
+                  id="tasaNominal"
+                  :prefix="symbol"
+                  v-model="rateAndTerm.tasaNominal"
+                  required
+                  class="input-same-width"
+              />
+            </div>
+
+            <!-- Plazo de Tasa -->
+            <div v-if="rateAndTerm.tipoTasa === 'NOMINAL'" class="p-field p-col-12 p-md-6 field-inline">
+              <label for="plazoDeTasaOption">
+                Plazo de Tasa <i class="pi pi-calendar"> :</i>
+              </label>
+              <Dropdown
+                  id="plazoDeTasaOption"
+                  v-model="rateAndTerm.plazoDeTasaOption"
+                  :options="plazoDeTasaOptions"
+                  placeholder="Seleccione plazo de tasa"
+                  required
+                  class="input-same-width"
+              />
+              <InputNumber
+                  v-if="rateAndTerm.plazoDeTasaOption === 'Especial'"
+                  mode="decimal"
+                  :minFractionDigits="0"
+                  :maxFractionDigits="4"
+                  id="plazoDeTasa"
+                  v-model="rateAndTerm.plazoDeTasa"
+                  required
+                  class="input-same-width"
+              />
+            </div>
+
+            <!-- Periodo Capital -->
+            <div v-if="rateAndTerm.tipoTasa === 'NOMINAL'" class="p-field p-col-12 p-md-6 field-inline">
+              <label for="periodoCapital">
+                Periodo Capital <i class="pi pi-clock"> :</i>
+              </label>
+              <InputNumber
+                  mode="decimal"
+                  :minFractionDigits="0"
+                  :maxFractionDigits="4"
+                  id="periodoCapital"
+                  v-model="rateAndTerm.periodoCapital"
+                  required
+                  class="input-same-width"
+              />
+            </div>
+
+            <!-- Tasa Efectiva -->
+            <div v-if="rateAndTerm.tipoTasa === 'EFECTIVA'" class="p-field p-col-12 p-md-6 field-inline">
+              <label for="tasaEfectiva">
+                Tasa Efectiva <i class="pi pi-percentage"> :</i>
+              </label>
+              <InputNumber
+                  mode="decimal"
+                  :minFractionDigits="0"
+                  :maxFractionDigits="4"
+                  id="tasaEfectiva"
+                  v-model="rateAndTerm.tasaEfectiva"
+                  required
+                  class="input-same-width"
+              />
+            </div>
+
+            <!-- Plazo Efectivo -->
+            <div v-if="rateAndTerm.tipoTasa === 'EFECTIVA'" class="p-field p-col-12 p-md-6 field-inline">
+              <label for="plazoEfectivo">
+                Plazo Efectivo <i class="pi pi-calendar"> :</i>
+              </label>
+              <InputNumber
+                  mode="decimal"
+                  :minFractionDigits="0"
+                  :maxFractionDigits="4"
+                  id="plazoEfectivo"
+                  v-model="rateAndTerm.plazoEfectivo"
+                  required
+                  class="input-same-width"
+              />
+            </div>
+
+            <!-- Fecha de Descuento -->
+            <div class="p-field p-col-12 p-md-6 field-inline">
+              <label for="fechaDescuento">
+                Fecha Descuento <i class="pi pi-calendar"> :</i>
+              </label>
+              <Calendar id="fechaDescuento" v-model="rateAndTerm.fechaDescuento" required class="input-same-width"/>
+            </div>
+
+          </div>
+        </Form>
+      </div>
+    </template>
+  </Card>
+</template>
+
 <script>
 import FinanceDataService from '../../services/FinanceDataService.js';
 import moment from 'moment';
-import { reactive } from 'vue';
+import {reactive} from 'vue';
 
 export default {
   name: 'RateAndTermInformation',
@@ -11,7 +139,7 @@ export default {
         tipoTasa: 'EFECTIVA',
         tasaNominal: 0,
         plazoDeTasa: 0,
-        plazoDeTasaOption: '', // Opcional para manejo de selección en el frontend
+        plazoDeTasaOption: '',
         periodoCapital: 0,
         fechaDescuento: '',
         tasaEfectiva: 0,
@@ -25,26 +153,21 @@ export default {
   methods: {
     async submitRateAndTerm() {
       try {
-        // Excluir `plazoDeTasaOption` y transformar valores
-        const { plazoDeTasaOption, ...dataToSend } = this.rateAndTerm;
+        const {plazoDeTasaOption, ...dataToSend} = this.rateAndTerm;
 
-        // Ajustar valores numéricos y formatos antes de enviar
         if (dataToSend.tipoTasa === 'NOMINAL') {
-          dataToSend.tasaNominal = dataToSend.tasaNominal / 100; // Convertir de porcentaje a decimal
+          dataToSend.tasaNominal = dataToSend.tasaNominal / 100;
         } else if (dataToSend.tipoTasa === 'EFECTIVA') {
-          dataToSend.tasaEfectiva = dataToSend.tasaEfectiva / 100; // Convertir de porcentaje a decimal
+          dataToSend.tasaEfectiva = dataToSend.tasaEfectiva / 100;
         }
 
-        dataToSend.fechaDescuento = moment(dataToSend.fechaDescuento).format('YYYY-MM-DD'); // Formato de fecha
+        dataToSend.fechaDescuento = moment(dataToSend.fechaDescuento).format('YYYY-MM-DD');
 
-        // Log para ver los datos que se enviarán al backend
         console.log('Enviando datos:', JSON.stringify(dataToSend, null, 2));
 
-        // Envío de datos al servicio
         const response = await FinanceDataService.createTasaYPlazo(dataToSend);
         console.log('Tasa y Plazo creados:', response.data);
       } catch (error) {
-        // Manejador de errores mejorado
         console.error('Error al crear Tasa y Plazo:', error.response ? error.response.data : error.message);
       }
     }
@@ -52,140 +175,38 @@ export default {
 }
 </script>
 
-<template>
-  <Card>
-    <template #content>
-      <h3>Información de Tasa y Plazo</h3>
-      <Form @submit.prevent="submitRateAndTerm">
-        <!-- Tipo de Tasa -->
-        <div class="p-field">
-          <label>Tipo Tasa:</label>
-          <Dropdown
-              id="tipoTasa"
-              v-model="rateAndTerm.tipoTasa"
-              :options="tipoTasaOptions"
-              placeholder="Seleccione tipo de tasa"
-              required
-          />
-        </div>
-
-        <!-- Sección para Tasa Nominal -->
-        <div v-if="rateAndTerm.tipoTasa === 'NOMINAL'">
-          <div class="p-field">
-            <label>Tasa Nominal:</label>
-            <InputNumber
-                mode="decimal"
-                :minFractionDigits="0"
-                :maxFractionDigits="4"
-                id="tasaNominal"
-                :prefix="symbol"
-                v-model="rateAndTerm.tasaNominal"
-                required
-            />
-          </div>
-          <div class="p-field">
-            <label>Plazo de Tasa:</label>
-            <Dropdown
-                id="plazoDeTasaOption"
-                v-model="rateAndTerm.plazoDeTasaOption"
-                :options="plazoDeTasaOptions"
-                placeholder="Seleccione plazo de tasa"
-                required
-            />
-            <InputNumber
-                v-if="rateAndTerm.plazoDeTasaOption === 'Especial'"
-                mode="decimal"
-                :minFractionDigits="0"
-                :maxFractionDigits="4"
-                id="plazoDeTasa"
-                v-model="rateAndTerm.plazoDeTasa"
-                required
-            />
-          </div>
-          <div class="p-field">
-            <label>Periodo Capital:</label>
-            <InputNumber
-                mode="decimal"
-                :minFractionDigits="0"
-                :maxFractionDigits="4"
-                id="periodoCapital"
-                v-model="rateAndTerm.periodoCapital"
-                required
-            />
-          </div>
-        </div>
-
-        <!-- Sección para Tasa Efectiva -->
-        <div v-if="rateAndTerm.tipoTasa === 'EFECTIVA'">
-          <div class="p-field">
-            <label>Tasa Efectiva:</label>
-            <InputNumber
-                mode="decimal"
-                :minFractionDigits="0"
-                :maxFractionDigits="4"
-                id="tasaEfectiva"
-                v-model="rateAndTerm.tasaEfectiva"
-                required
-            />
-          </div>
-          <div class="p-field">
-            <label>Plazo Efectivo:</label>
-            <InputNumber
-                mode="decimal"
-                :minFractionDigits="0"
-                :maxFractionDigits="4"
-                id="plazoEfectivo"
-                v-model="rateAndTerm.plazoEfectivo"
-                required
-            />
-          </div>
-        </div>
-
-        <!-- Fecha de Descuento -->
-        <div class="p-field">
-          <label>Fecha Descuento:</label>
-          <Calendar id="fechaDescuento" v-model="rateAndTerm.fechaDescuento" required/>
-        </div>
-      </Form>
-    </template>
-  </Card>
-</template>
-
 <style scoped>
-form {
+.field-inline {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  height: 100%;
+  gap: 3rem;
 }
 
 label {
   font-weight: bold;
+  text-align: right;
 }
 
-input, select {
-  padding: 0.5rem;
-  font-size: 1rem;
+.field-inline label {
+  min-width: 200px;
+  text-align: right;
 }
 
-button {
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-
-h3 {
-  text-align: center;
+/* Establece un ancho uniforme para Calendar y InputNumber */
+.input-same-width {
   width: 100%;
+  max-width: 300px;
+}
+
+.p-grid {
+  gap: 5px;
+}
+
+.p-field {
+  margin-bottom: 5px;
+}
+
+.move-right {
+  margin-left: 2.5rem;
 }
 </style>

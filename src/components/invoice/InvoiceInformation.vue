@@ -9,19 +9,25 @@
 
             <!-- Fecha Emisión -->
             <div class="p-field p-col-12 p-md-6 field-inline">
-              <label for="fechaEmision">Fecha Emisión:</label>
+              <label for="fechaEmision">
+                Fecha Emisión <i class="pi pi-calendar"> :</i>
+              </label>
               <Calendar id="fechaEmision" v-model="invoice.fechaEmision" required class="input-same-width"></Calendar>
             </div>
 
             <!-- Fecha Pago -->
             <div class="p-field p-col-12 p-md-6 field-inline">
-              <label for="fechaPago">Fecha Pago:</label>
+              <label for="fechaPago">
+                Fecha Pago <i class="pi pi-calendar"> :</i>
+              </label>
               <Calendar id="fechaPago" v-model="invoice.fechaPago" required class="input-same-width"></Calendar>
             </div>
 
             <!-- Total Facturado -->
             <div class="p-field p-col-12 p-md-6 field-inline">
-              <label for="totalFacturado">Total Facturado:</label>
+              <label for="totalFacturado">
+                Total Facturado <i class="pi pi-dollar"> :</i>
+              </label>
               <InputNumber
                   id="totalFacturado"
                   v-model="invoice.totalFacturado"
@@ -35,7 +41,9 @@
 
             <!-- Retención -->
             <div class="p-field p-col-12 p-md-6 field-inline">
-              <label for="retencion">Retención:</label>
+              <label for="retencion">
+                Retención <i class="pi pi-arrow-right-arrow-left"> :</i>
+              </label>
               <InputNumber
                   id="retencion"
                   v-model="invoice.retencion"
@@ -89,13 +97,14 @@ export default {
 .field-inline {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 4rem;
 }
 label {
   font-weight: bold;
+  text-align: right;
 }
 .field-inline label {
-  min-width: 120px;
+  min-width: 200px;
   text-align: right;
 }
 
@@ -103,6 +112,14 @@ label {
 .input-same-width {
   width: 100%; /* Asegura que todos ocupen el mismo ancho disponible */
   max-width: 300px; /* Puedes ajustar este valor según el diseño deseado */
+}
+
+.p-grid {
+  gap: 5px; /* Ajusta este valor según el espacio deseado */
+}
+
+.p-field {
+  margin-bottom: 5px; /* Ajusta este valor según el espacio deseado */
 }
 </style>
 

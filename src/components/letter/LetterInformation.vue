@@ -1,3 +1,66 @@
+<template>
+  <Card title="Letter Information">
+    <template #content>
+      <h3>Información de la Letra</h3>
+      <div class="card flex justify-center">
+        <Form @submit.prevent="submitLetter">
+          <div class="p-grid p-fluid">
+
+            <!-- Fecha Giro -->
+            <div class="p-field p-col-12 p-md-6 field-inline">
+              <label for="fechaGiro">
+                Fecha Giro <i class="pi pi-calendar"> :</i>
+              </label>
+              <Calendar id="fechaGiro" v-model="letter.fechaGiro" required class="input-same-width"/>
+            </div>
+
+            <!-- Fecha Vencimiento -->
+            <div class="p-field p-col-12 p-md-6 field-inline">
+              <label for="fechaVencimiento">
+                Fecha Vencimiento <i class="pi pi-calendar"> :</i>
+              </label>
+              <Calendar id="fechaVencimiento" v-model="letter.fechaVencimiento" required class="input-same-width"/>
+            </div>
+
+            <!-- Valor Nominal -->
+            <div class="p-field p-col-12 p-md-6 field-inline">
+              <label for="valorNominal">
+                Valor Nominal <i class="pi pi-dollar"> :</i>
+              </label>
+              <InputNumber
+                  id="valorNominal"
+                  v-model="letter.valorNominal"
+                  mode="decimal"
+                  :minFractionDigits="0"
+                  :maxFractionDigits="4"
+                  required
+                  class="input-same-width"
+              />
+            </div>
+
+            <!-- Retención -->
+            <div class="p-field p-col-12 p-md-6 field-inline">
+              <label for="retencion">
+                Retención <i class="pi pi-arrow-right-arrow-left"> :</i>
+              </label>
+              <InputNumber
+                  id="retencion"
+                  v-model="letter.retencion"
+                  mode="decimal"
+                  :minFractionDigits="0"
+                  :maxFractionDigits="4"
+                  required
+                  class="input-same-width"
+              />
+            </div>
+
+          </div>
+        </Form>
+      </div>
+    </template>
+  </Card>
+</template>
+
 <script>
 import FinanceDataService from '../../services/FinanceDataService.js';
 import { reactive } from 'vue';
@@ -33,88 +96,32 @@ export default {
 }
 </script>
 
-<template>
-  <Card title="Letter Information">
-    <template #content>
-      <h3>Información de la Letra</h3>
-      <Form @submit.prevent="submitLetter" class="form-container">
-        <div class="p-field field-inline">
-          <label for="fechaGiro">Fecha Giro:</label>
-          <Calendar id="fechaGiro" v-model="letter.fechaGiro" required class="input-same-width"/>
-        </div>
-
-        <div class="p-field field-inline">
-          <label for="fechaVencimiento">Fecha Vencimiento:</label>
-          <Calendar id="fechaVencimiento" v-model="letter.fechaVencimiento" required class="input-same-width"/>
-        </div>
-
-        <div class="p-field field-inline">
-          <label for="valorNominal">Valor Nominal:</label>
-          <InputNumber
-              id="valorNominal"
-              v-model="letter.valorNominal"
-              mode="decimal"
-              :minFractionDigits="0"
-              :maxFractionDigits="4"
-              required
-              class="input-same-width"
-          />
-        </div>
-
-        <div class="p-field field-inline">
-          <label for="retencion">Retención:</label>
-          <InputNumber
-              id="retencion"
-              v-model="letter.retencion"
-              mode="decimal"
-              :minFractionDigits="0"
-              :maxFractionDigits="4"
-              required
-              class="input-same-width"
-          />
-        </div>
-      </Form>
-    </template>
-  </Card>
-</template>
-
 <style scoped>
-.form-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
 .field-inline {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 4rem;
 }
-
-.field-inline label {
-  min-width: 150px;
+label {
+  font-weight: bold;
   text-align: right;
-  font-weight: bold;
+}
+.field-inline label {
+  min-width: 200px;
+  text-align: right;
 }
 
-/* Clase para hacer que todos los inputs tengan el mismo ancho */
+/* Establece un ancho uniforme para Calendar y InputNumber */
 .input-same-width {
-  width: 100%;
-  max-width: 300px; /* Ajusta este ancho según el diseño que desees */
+  width: 100%; /* Asegura que todos ocupen el mismo ancho disponible */
+  max-width: 300px; /* Puedes ajustar este valor según el diseño deseado */
 }
 
-h3 {
-  text-align: center;
-  width: 100%;
-  font-size: 1.5rem;
+.p-grid {
+  gap: 5px;
 }
-label{
-  font-weight: bold;
-}
-.submit-button {
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  cursor: pointer;
-  align-self: center;
+
+.p-field {
+  margin-bottom: 5px;
 }
 </style>

@@ -3,57 +3,71 @@
     <template #content>
       <h3>Agregar Gastos</h3>
       <form @submit.prevent="storeCostsAndExpenses">
-        <div>
-          <label for="tipoGasto" class="black-text">Tipo Gasto:</label>
-          <Dropdown
-              v-model="costsAndExpenses.tipoGasto"
-              :options="options"
-              optionLabel="label"
-              placeholder="Selecciona un tipo de gasto"
-              required
-          />
+        <div class="move-right">
+          <div class="p-field p-col-12 p-md-6 field-inline">
+            <label for="tipoGasto" class="black-text">
+              Tipo Gasto <i class="pi pi-info-circle"> :</i>
+            </label>
+            <Dropdown
+                v-model="costsAndExpenses.tipoGasto"
+                :options="options"
+                optionLabel="label"
+                placeholder="Selecciona un tipo de gasto"
+                required
+                class="input-same-width"
+            />
+          </div>
+          <div class="p-field p-col-12 p-md-6 field-inline">
+            <label for="motivoGasto">
+              Motivo Gasto <i class="pi pi-info-circle"> :</i>
+            </label>
+            <Dropdown
+                v-model="costsAndExpenses.motivoGasto"
+                :options="motivoGastoOptions"
+                optionLabel="label"
+                optionValue="value"
+                placeholder="Selecciona un motivo de gasto"
+                class="input-same-width"
+            />
+          </div>
+          <div class="p-field p-col-12 p-md-6 field-inline">
+            <label class="black-text">
+              ¿Es Porcentaje? <i class="pi pi-percentage"> :</i>
+            </label>
+            <Checkbox
+                id="esPorcentaje"
+                v-model="costsAndExpenses.valorExpresado.esPorcentaje"
+                :binary="true"
+                class="input-same-width"
+            />
+          </div>
+          <div class="p-field p-col-12 p-md-6 field-inline">
+            <label>
+              Valor <i class="pi pi-dollar"> :</i>
+            </label>
+            <Button
+                v-if="!costsAndExpenses.valorExpresado.esPorcentaje"
+                type="button"
+                @click="toggleCurrency"
+                class="black-text"
+            >
+              Tipo de moneda
+            </Button>
+            <InputNumber
+                id="valor"
+                v-model="costsAndExpenses.valorExpresado.valor"
+                mode="decimal"
+                :minFractionDigits="0"
+                :maxFractionDigits="4"
+                :prefix="currencySymbol"
+                required
+                class="input-same-width"
+            />
+          </div>
         </div>
-        <div>
-          <label for="motivoGasto">Motivo Gasto:</label>
-          <Dropdown
-              v-model="costsAndExpenses.motivoGasto"
-              :options="motivoGastoOptions"
-              optionLabel="label"
-              optionValue="value"
-              placeholder="Selecciona un motivo de gasto"
-          />
-        </div>
-        <div>
-          <label class="black-text">¿Es Porcentaje?</label>
-          <Checkbox
-              id="esPorcentaje"
-              v-model="costsAndExpenses.valorExpresado.esPorcentaje"
-              :binary="true"
-          />
-        </div>
-        <div>
-          <label>Valor:</label>
-          <Button
-              v-if="!costsAndExpenses.valorExpresado.esPorcentaje"
-              type="button"
-              @click="toggleCurrency"
-              class="black-text"
-          >
-            Tipo de moneda
-          </Button>
-          <InputNumber
-              id="valor"
-              v-model="costsAndExpenses.valorExpresado.valor"
-              mode="decimal"
-              :minFractionDigits="0"
-              :maxFractionDigits="4"
-              :prefix="currencySymbol"
-              required
-          />
-        </div>
-        <Button type="submit" class="black-text">Guardar</Button>
+        <Button type="submit" class="black-text button-spacing">Guardar</Button>
         <div class="card flex justify-content-center">
-          <Button label="Show" icon="pi pi-external-link" @click="visible = true" />
+          <Button label="Show" icon="pi pi-external-link" @click="visible = true" class="button-spacing" />
           <Dialog
               v-model:visible="visible"
               modal
@@ -67,7 +81,7 @@
               <Column field="valorExpresado.valor" header="Valor Expresado"></Column>
             </DataTable>
           </Dialog>
-          <Button label="Limpiar" icon="pi pi-times" @click="deleteCostesGastos" />
+          <Button label="Limpiar" icon="pi pi-times" @click="deleteCostesGastos" class="button-spacing" />
         </div>
       </form>
     </template>
@@ -116,8 +130,6 @@ export default {
     'costsAndExpenses.valorExpresado.esPorcentaje'(newValue) {
       this.currencySymbol = newValue ? '%' : '$';
     },
-
-
   },
   methods: {
     storeCostsAndExpenses() {
@@ -164,45 +176,37 @@ export default {
 </script>
 
 <style scoped>
-form {
+.field-inline {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  width: 100%;
+  gap: 4rem;
 }
 
 label {
   font-weight: bold;
+  text-align: right;
 }
 
-input,
-select {
-  padding: 0.5rem;
-  font-size: 1rem;
+.field-inline label {
+  min-width: 200px;
+  text-align: right;
 }
 
-button {
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.black-text {
-  color: black;
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-
-h3 {
-  text-align: center;
+/* Establece un ancho uniforme para Calendar y InputNumber */
+.input-same-width {
   width: 100%;
+  max-width: 300px;
+}
+
+.p-field {
+  margin-bottom: 5px;
+}
+
+.move-right {
+  margin-left: 35rem;
+}
+
+.button-spacing {
+  margin: 2rem 1rem 0 1rem;
 }
 </style>
