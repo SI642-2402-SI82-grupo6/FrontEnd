@@ -1,6 +1,8 @@
 <script>
 import FinanceDataService from '../../services/FinanceDataService.js';
 import { reactive } from 'vue';
+import moment from "moment";
+
 export default {
   name: 'LetterInformation',
   data() {
@@ -16,7 +18,12 @@ export default {
   methods: {
     async submitLetter() {
       try {
-        const response = await FinanceDataService.createLetra(this.letter);
+        const formattedLetter = {
+          ...this.letter,
+          fechaGiro: moment(this.letter.fechaGiro).format('YYYY-MM-DD'),
+          fechaVencimiento: moment(this.letter.fechaVencimiento).format('YYYY-MM-DD')
+        };
+        const response = await FinanceDataService.createLetra(formattedLetter);
         console.log('Letter created:', response.data);
       } catch (error) {
         console.error('Error creating letter:', error);
