@@ -3,19 +3,14 @@ import FinanceDataService from "../../services/FinanceDataService.js";
 
 export default {
   props: {
-    invoiceId: {
-      type: Number,
-      required: true
+    invoice: {
+      type: Object,
+      required: true,
     }
-  },
-  data() {
-    return {
-      invoice: null
-    };
   },
   methods: {
     fetchInvoice() {
-      FinanceDataService.getFactura(this.InvoiceModel.id)
+      FinanceDataService.getFactura(this.invoice.id)
           .then(response => {
             this.invoice = response.data;
           })
@@ -24,11 +19,13 @@ export default {
           });
     },
     viewDetails() {
-      // Lógica para ver detalles de la factura
+      if (this.invoice) {
+        alert(`Detalles de la factura:\nNúmero: ${this.invoice.number}\nFecha: ${this.invoice.date}\nMonto: ${this.invoice.amount}\nEstado: ${this.invoice.status}`);
+      }
     }
   },
   mounted() {
-    if (this.invoiceId) {
+    if (this.invoice) {
       this.fetchInvoice();
     }
   }

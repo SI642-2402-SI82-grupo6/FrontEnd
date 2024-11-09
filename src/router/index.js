@@ -7,6 +7,8 @@ import LetterView from "../views/document/LetterView.vue";
 import About from "../views/home/About.vue";
 import Contact from "../views/home/Contact.vue";
 import Services from "../views/home/Services.vue";
+import InvoiceDetails from "../components/invoice/InvoiceDetails.vue";
+
 function isAuthenticated() {
   const user = JSON.parse(localStorage.getItem('user'));
   console.log('User:', user); // Verify the user
@@ -64,7 +66,12 @@ const routes = [
       name: 'services',
       component: Services,
       meta: { requiresAuth: true }
-
+    },
+    {
+      path: '/invoice/:id',
+      name: 'InvoiceDetails',
+      component: InvoiceDetails,
+      props: true
     }
 ];
 
