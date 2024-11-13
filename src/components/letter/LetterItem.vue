@@ -1,5 +1,6 @@
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps, defineEmits } from 'vue';
+import FinanceDataService from "../../services/FinanceDataService.js";
 
 const props = defineProps({
   letter: {
@@ -7,6 +8,19 @@ const props = defineProps({
     required: true
   }
 });
+
+const emit = defineEmits(['letter-deleted']);
+
+const deleteLetter = (id) => {
+  FinanceDataService.deleteLetra(id)
+      .then(() => {
+        emit('letter-deleted');
+      })
+      .catch(error => {
+
+        console.error('Error deleting letter:', error);
+      });
+};
 
 const viewDetails = () => {
   console.log('Viewing details for letter:', props.letter);
@@ -20,8 +34,11 @@ const viewDetails = () => {
     <Column field="fechaVencimiento" header="Fecha de Vencimiento"></Column>
     <Column field="valorNominal" header="Valor Nominal"></Column>
     <Column field="retencion" header="Retención"></Column>
-
-
+    <Column header="Actions">
+      <template #body="slotProps">
+        <Button @click="deleteLetter(letter.id)" label="Delete"/>
+      </template>
+    </Column>
   </DataTable>
 </template>
 

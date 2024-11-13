@@ -1,25 +1,33 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, defineEmits } from 'vue';
 import FinanceDataService from '../../services/FinanceDataService.js';
+
+const emit = defineEmits(['wallet-created']);
+
 const formData = ref({
   name: '',
   typeMoney: ''
 });
+
 const submitForm = () => {
-
-
   console.log('Form Data:', formData.value);
 
-  FinanceDataService.createCartera(formData.value);
-
+  FinanceDataService.createCartera(formData.value)
+      .then(() => {
+        // Emite el evento `wallet-created` cuando la cartera se haya creado correctamente
+        emit('wallet-created');
+      })
+      .catch(error => {
+        console.error('Error creating wallet:', error);
+      });
 };
+
 const options = ref([
   { name: 'S/. Soles Peruanos', value: 'S/.' },
   { name: 'USD Dolares Americanos ', value: '$' },
-
 ]);
-
 </script>
+
 
 <template>
   <Form @submit="submitForm">
@@ -43,6 +51,7 @@ const options = ref([
       </div>
     </div>
   </Form>
+
 </template>
 
 <style scoped>

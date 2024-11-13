@@ -4,13 +4,21 @@ import WalletCreate from '../../components/wallet/WalletCreate.vue';
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 
-
 const showCreateForm = ref(false);
 const router = useRouter();
+const walletListRef = ref(null);
+
+
 
 const toggleCreateForm = () => {
   showCreateForm.value = !showCreateForm.value;
+
+
 };
+const onWalletCreated = () => {
+  walletListRef.value.onWalletCreated();
+};
+
 
 // Definir las opciones del menú
 const menuItems = [
@@ -27,11 +35,13 @@ const menuItems = [
       },
       {
         label: 'Create Wallet',
+
         command: toggleCreateForm
       }
     ]
   }
 ];
+
 </script>
 
 <template>
@@ -48,11 +58,11 @@ const menuItems = [
         :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
     >
       <!-- Aquí se renderiza el componente WalletCreate dentro del diálogo -->
-      <WalletCreate />
+      <WalletCreate   @wallet-created="onWalletCreated" />
     </Dialog>
 
     <!-- Lista de Wallets -->
-    <WalletList />
+    <WalletList ref="walletListRef"  />
   </div>
 </template>
 

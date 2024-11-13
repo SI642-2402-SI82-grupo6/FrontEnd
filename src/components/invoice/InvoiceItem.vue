@@ -8,6 +8,16 @@ const props = defineProps({
     required: true
   }
 });
+
+const deleteInvoice = (id) => {
+  FinanceDataService.deleteFactura(id)
+      .then(() => {
+        console.log('Invoice deleted:', id);
+      })
+      .catch(error => {
+        console.error('Error deleting invoice:', error);
+      });
+};
 </script>
 
 <template>
@@ -16,6 +26,11 @@ const props = defineProps({
     <Column field="fechaPago" header="Fecha de Pago" ></Column>
     <Column field="totalFacturado" header="Total Facturado"></Column>
     <Column field="retencion" header="Retención"></Column>
+    <Column header="Actions">
+      <template #body="slotProps">
+        <Button @click="deleteInvoice(invoice.id)" label="Delete"/>
+      </template>
+    </Column>
   </DataTable>
 </template>
 
