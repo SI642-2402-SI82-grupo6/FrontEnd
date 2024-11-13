@@ -11,7 +11,7 @@
             <Dropdown
                 v-model="costsAndExpenses.tipoGasto"
                 :options="options"
-                optionLabel="label"
+
 
 
                 placeholder="Selecciona un tipo de gasto"
