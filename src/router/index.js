@@ -111,6 +111,13 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   console.log('Navigating to:', to.name);
+
+  // Check if the URL is /wallet? and redirect to /wallet
+  if (to.path === '/wallet?' || to.fullPath === '/wallet?') {
+    next({ path: '/wallet' });
+    return;
+  }
+
   if (to.matched.some(record => record.meta.requiresAuth)) {
     console.log('Requires authentication');
     if (!isAuthenticated()) {
