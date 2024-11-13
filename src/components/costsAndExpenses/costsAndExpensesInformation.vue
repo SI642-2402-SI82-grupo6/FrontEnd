@@ -156,16 +156,11 @@ export default {
         console.error('Error fetching Costs and Expenses:', error.response || error.message);
       }
     },
-    async deleteCostesGastos() {
-      for (const item of this.costesGastos) {
-        try {
-          const response = await FinanceDataService.deleteCostesGastos(item.id);
-          console.log('Costs and Expenses deleted:', response.data);
-        } catch (error) {
-          console.error('Error deleting Costs and Expenses:', error.response || error.message);
-        }
-      }
-    },
+    deleteCostesGastos() {
+      // Asignamos un arreglo vacío a costesGastos para eliminar todos los elementos
+      this.costesGastos = [];
+      console.log('All costs and expenses have been deleted:', this.costesGastos);
+    }
 
   },
 
