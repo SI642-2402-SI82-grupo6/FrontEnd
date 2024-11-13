@@ -2,7 +2,7 @@
   <Card title="Gastos">
     <template #content>
       <h3>Agregar Gastos</h3>
-      <form @submit.prevent="storeCostsAndExpenses">
+      <form @submit="storeCostsAndExpenses">
         <div class="move-right">
           <div class="p-field p-col-12 p-md-6 field-inline">
             <label for="tipoGasto" class="black-text">
