@@ -66,7 +66,7 @@
         </div>
 
         <div class="card flex justify-content-center">
-          <Button type="submit" class="black-text button-spacing" @click="storeCostsAndExpenses">Guardar</Button>
+          <Button type="submit" class="black-text button-spacing" @click.prevent="storeCostsAndExpenses">Guardar</Button>
           <Button label="Show" icon="pi pi-external-link" @click="visible = true" class="button-spacing" />
           <Dialog
               v-model:visible="visible"
