@@ -78,7 +78,11 @@
             <DataTable :value="costesGastos" class="text-surface-500 dark:text-surface-400 block mb-8">
               <Column field="tipoGasto" header="Tipo de Gasto"></Column>
               <Column field="motivoGasto" header="Motivo de Gasto"></Column>
-              <Column field="valorExpresado.valor" header="Valor Expresado"></Column>
+              <Column header="Valor Expresado">
+                <template #body="slotProps">
+                  <span>{{ slotProps.node.data.valorExpresado?.valor }}</span>
+                </template>
+              </Column>
             </DataTable>
           </Dialog>
           <Button label="Limpiar" icon="pi pi-times" @click="deleteCostesGastos" class="button-spacing" />
