@@ -1,5 +1,5 @@
 <script setup>
-import { ref, defineEmits } from 'vue';
+import { ref, defineEmits,computed } from 'vue';
 import FinanceDataService from '../../services/FinanceDataService.js';
 
 const emit = defineEmits(['wallet-created']);
@@ -26,6 +26,9 @@ const options = ref([
   { name: 'S/. Soles Peruanos', value: 'S/.' },
   { name: 'USD Dolares Americanos ', value: '$' },
 ]);
+const isFormValid = computed(() => {
+  return formData.value.name !== '' && formData.value.typeMoney !== '';
+});
 </script>
 
 
@@ -47,7 +50,7 @@ const options = ref([
 
       <!-- Submit Button -->
       <div class="p-field p-col-12">
-        <Button type="submit" label="Submit" />
+        <Button type="submit" label="Submit" :disabled="!isFormValid" />
       </div>
     </div>
   </Form>
