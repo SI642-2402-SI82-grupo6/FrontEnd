@@ -2,14 +2,11 @@
 import LetterInformation from '../../components/letter/LetterInformation.vue';
 import RateAndTermInformation from '../../components/RateAndTerm/RateAndTermInformation.vue';
 import CostsAndExpensesInformation from '../../components/costsAndExpenses/costsAndExpensesInformation.vue';
-import QueryResults from "../../components/results/QueryResults.vue";
-import MainMenu from "../../components/MainMenu.vue";
+
 
 export default {
   name: 'DocumentLetter',
   components: {
-    MainMenu,
-    QueryResults,
     LetterInformation,
     RateAndTermInformation,
     CostsAndExpensesInformation
@@ -18,8 +15,9 @@ export default {
     async submitAll() {
       try {
         await this.$refs.letterInfo.submitLetter();
-        await this.$refs.rateAndTermInfo.submitRateAndTerm();
         await this.$refs.costsAndExpensesInfo.sendAllCostsAndExpenses();
+        await this.$refs.rateAndTermInfo.submitRateAndTerm();
+
         alert('All submissions successful');
       } catch (error) {
         console.error('Error submitting forms:', error);
@@ -49,11 +47,7 @@ export default {
     </div>
   </div>
   <Button @click="submitAll" label="Agregar Letra" class="submit-button" />
-  <div class="p-grid p-nogutter">
-    <div class="p-col-12">
-      <QueryResults/>
-    </div>
-  </div>
+
 </template>
 
 

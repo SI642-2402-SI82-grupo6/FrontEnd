@@ -1,11 +1,12 @@
 <template>
+  <div class="content">
   <div class="login-container">
     <Form v-slot="$form" :resolver="resolver" :initial-values="initialValues"  @submit.prevent="handleLogin" >
       <h2>Login</h2>
       <img src="../../assets/logo.png" alt="Logo" class="login-image" />
       <div class="flex flex-column row-gap-6">
 
-        <InputGroup>
+        <InputGroup >
           <InputGroupAddon>
             <i class="pi pi-user"></i>
           </InputGroupAddon>
@@ -25,13 +26,14 @@
       <Button type="submit" label="LOGIN" class="login-btn" />
     </Form>
   </div>
+
+
+  </div>
 </template>
 <script >
 
 import { zodResolver } from '@primeuix/forms/resolvers/zod';
-import InputGroup from "primevue/inputgroup";
-import InputGroupAddon from "primevue/inputgroupaddon";
-import InputText from "primevue/inputtext";
+import {ref} from 'vue';
 import AuthService from '../../services/AuthService'
 import {z} from "zod";
 export default {
@@ -80,19 +82,29 @@ export default {
 <style scoped>
 @import url('primeicons/primeicons.css');
 
+.content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: url('../../assets/background.jpg') no-repeat center center fixed;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
 }
-
+h2 {
+  margin-bottom: 20px;
+  color: #fff;
+}
 
 body {
+
   background: url('../../assets/background.jpg') no-repeat center center fixed;
-  background-size: cover;
-  height: 100vh;
-  margin: 0;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -112,18 +124,7 @@ body {
   margin-bottom: 20px;
 }
 
-.input-group {
-  position: relative;
-  margin-bottom: 20px;
-}
 
-.input-group .icon {
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #1a1a1a;
-}
 
 .input-field {
   width: 100%;

@@ -2,6 +2,7 @@ import http from "../http-common";
 
 class FinanceDataService {
 
+    // Tasa y Plazo Controller
     getTasaYPlazo(id) {
         return http.get(`/wallet/tasa-y-plazo/${id}`);
     }
@@ -26,6 +27,7 @@ class FinanceDataService {
         return http.delete(`/wallet/tasa-y-plazo`);
     }
 
+    // Letra Controller
     getLetra(id) {
         return http.get(`/wallet/letras/${id}`);
     }
@@ -46,6 +48,7 @@ class FinanceDataService {
         return http.post(`/wallet/letras`, data);
     }
 
+    // Factura Controller
     getFactura(id) {
         return http.get(`/wallet/facturas/${id}`);
     }
@@ -66,6 +69,7 @@ class FinanceDataService {
         return http.post(`/wallet/facturas`, data);
     }
 
+    // Costes y Gastos Controller
     getCostesGastos(id) {
         return http.get(`/wallet/costes-gastos/${id}`);
     }
@@ -86,29 +90,46 @@ class FinanceDataService {
         return http.post(`/wallet/costes-gastos`, data);
     }
 
-    createResultadosConsulta() {
-        return http.post(`/wallet/resultados/consulta`);
+    deleteCostesGastosAll() {
+        return http.delete(`/wallet/costes-gastos`);
     }
 
-    getAllResultadosConsulta() {
-        return http.get(`/wallet/resultados/consulta/all`);
+    // Cartera Controller
+    createCartera(data) {
+        return http.post(`/wallet/cartera/crearCartera`, data);
     }
 
-    getResultadosCartera() {
-        return http.get(`/wallet/resultados/cartera/consultar`);
+    agregarDocumento(cartId, documentId) {
+        return http.post(`/wallet/cartera/agregarDocumento?carteraId=${cartId}&doumentoId=${documentId}`);
     }
 
+    obtenerCarteras() {
+        return http.get(`/wallet/cartera/obtenerCarteras`);
+    }
+    obtenerResultadoDeCartera(id) {
+        return http.get(`/wallet/cartera/obtenerResultadosConsultaPorCartera?carteraId=${id}`)
+    }
+
+    obtenerCartera(id) {
+        return http.get(`/wallet/cartera/obtenerCartera/${id}`);
+    }
+    obtenerDocumentosCreados(){
+        return http.get(`/wallet/resultados/consulta/obtenerDocumentosCreados`);
+    }
+
+    eliminarCartera(id) {
+        return http.delete(`/wallet/cartera/eliminarCartera?carteraId=${id}`);
+    }
+
+    // Auth Controller
     signup(data) {
         return http.post(`/auth/signup`, data);
-    }
-    deleteCostesGastosAll(){
-        return http.delete(`/wallet/costes-gastos`);
     }
 
 
 
     logout() {
-        return http.post(`/auth/logout`).then(response => {
+        return http.post(`/api/auth/logout`).then(response => {
             if (response.data && response.data.message) {
                 localStorage.removeItem('authToken'); // Remove the token from localStorage
                 localStorage.removeItem('user'); // Remove the user from localStorage
@@ -117,6 +138,11 @@ class FinanceDataService {
                 throw new Error("Logout response does not contain a message.");
             }
         });
+    }
+
+    // Resultados Consulta Controller
+    obtenerResultadosConsulta() {
+        return http.get(`/api/wallet/resultados/consulta/obtenerResultados`);
     }
 }
 

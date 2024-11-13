@@ -1,17 +1,31 @@
 <!doctype html>
 <html lang="en">
-  <head>
-      <meta charset="utf-8" />
-      <link rel="icon" type="image/svg+xml" href="/logo.svg" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <meta name="theme-color" content="#000000" />
-      <link rel="stylesheet" href="https://unpkg.com/primeicons@6.0.1/primeicons.css">
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="stylesheet" href="https://unpkg.com/primeicons@6.0.1/primeicons.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PyME wadle</title>
-  </head>
-  <body>
-    <div id="app"></div>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+        #app {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+<div id="app"></div>
 
-    <script type="module" src="/src/main.js"></script>
-  </body>
+<script type="module" src="/src/main.js"></script>
+</body>
 </html>

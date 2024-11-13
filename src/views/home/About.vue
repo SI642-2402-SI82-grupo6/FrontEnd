@@ -15,6 +15,9 @@ const tabs = ref([
 ]);
 </script>
 <template>
+  <div>
+
+
 
   <Card>
     <template #header>
@@ -32,15 +35,17 @@ const tabs = ref([
       </p>
     </template>
   </Card>
-
+    <Divider />
   <Card>
     <template #header>
       <Tag value="Equipo de desarrollo"></Tag>
     </template>
+
+
     <template #content>
       <p>Este es el equipo de desarrollo de la aplicación</p>
       <Accordion>
-        <AccordionTab header="Team Leader">
+        <AccordionTab header="Team Leader" >
           <Accordion>
             <AccordionTab header="Sergio Joel Pecan Pariona">
 
@@ -56,6 +61,7 @@ const tabs = ref([
             </AccordionTab>
           </Accordion>
         </AccordionTab>
+
         <AccordionTab header="Integrates del equipo">
           <Accordion>
             <AccordionTab header="Integrante 1">
@@ -108,7 +114,7 @@ const tabs = ref([
       </Accordion>
     </template>
   </Card>
-
+  </div>
 </template>
 
 <style scoped>

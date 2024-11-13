@@ -90,6 +90,7 @@
                   :maxFractionDigits="4"
                   id="tasaEfectiva"
                   v-model="rateAndTerm.tasaEfectiva"
+                  :prefix="symbol"
                   required
                   class="input-same-width"
               />
@@ -102,6 +103,7 @@
               </label>
               <InputNumber
                   mode="decimal"
+                  :invalid="rateAndTerm.plazoEfectivo <= 0"
                   :minFractionDigits="0"
                   :maxFractionDigits="4"
                   id="plazoEfectivo"
@@ -109,6 +111,7 @@
                   required
                   class="input-same-width"
               />
+              <message v-if="!rateAndTerm.plazoEfectivo" severity="error" text="El valor debe ser mayor a 0" >Debe ser mayor a 0</message>
             </div>
 
             <!-- Fecha de Descuento -->

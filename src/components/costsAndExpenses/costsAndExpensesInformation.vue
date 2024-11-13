@@ -12,8 +12,10 @@
                 v-model="costsAndExpenses.tipoGasto"
                 :options="options"
                 optionLabel="label"
+                optionValue="value"
+
                 placeholder="Selecciona un tipo de gasto"
-                required
+
                 class="input-same-width"
             />
           </div>
@@ -37,6 +39,7 @@
             <Checkbox
                 id="esPorcentaje"
                 v-model="costsAndExpenses.valorExpresado.esPorcentaje"
+                @click="toggleCurrency"
                 :binary="true"
                 class="input-same-width"
             />
@@ -45,28 +48,25 @@
             <label>
               Valor <i class="pi pi-dollar"> :</i>
             </label>
-            <Button
-                v-if="!costsAndExpenses.valorExpresado.esPorcentaje"
-                type="button"
-                @click="toggleCurrency"
-                class="black-text"
-            >
-              Tipo de moneda
-            </Button>
+
             <InputNumber
-                id="valor"
                 v-model="costsAndExpenses.valorExpresado.valor"
+                :invalid="costsAndExpenses.valorExpresado.valor <= 0"
                 mode="decimal"
                 :minFractionDigits="0"
                 :maxFractionDigits="4"
                 :prefix="currencySymbol"
+                placeholder="Amount"
                 required
                 class="input-same-width"
             />
+            <Message v-if="!costsAndExpenses.valorExpresado.valor" severity="error" variant="outlined">No puede ser negativo o cero</Message>
+
           </div>
         </div>
-        <Button type="submit" class="black-text button-spacing">Guardar</Button>
+
         <div class="card flex justify-content-center">
+          <Button type="submit" class="black-text button-spacing">Guardar</Button>
           <Button label="Show" icon="pi pi-external-link" @click="visible = true" class="button-spacing" />
           <Dialog
               v-model:visible="visible"
@@ -76,7 +76,7 @@
               :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
           >
             <DataTable :value="costesGastos" class="text-surface-500 dark:text-surface-400 block mb-8">
-              <Column field="tipoGasto.label" header="Tipo de Gasto"></Column>
+              <Column field="tipoGasto" header="Tipo de Gasto"></Column>
               <Column field="motivoGasto" header="Motivo de Gasto"></Column>
               <Column field="valorExpresado.valor" header="Valor Expresado"></Column>
             </DataTable>
@@ -92,7 +92,7 @@
 import FinanceDataService from '../../services/FinanceDataService.js';
 import 'primeicons/primeicons.css';
 import { ref } from 'vue';
-import { toggleCurrency } from '../../utils/currencyUtils.js';
+
 export default {
   name: 'CostsAndExpensesInformation',
   data() {
@@ -101,7 +101,7 @@ export default {
       costesGastos: [],
       costsAndExpenses: {
         tipoGasto: 'INICIAL',
-        motivoGasto: '',
+        motivoGasto: 'Portes',
         valorExpresado: {
           esPorcentaje: false,
           valor: 0,
@@ -126,11 +126,7 @@ export default {
       currencySymbol: '$',
     };
   },
-  watch: {
-    'costsAndExpenses.valorExpresado.esPorcentaje'(newValue) {
-      this.currencySymbol = newValue ? '%' : '$';
-    },
-  },
+
   methods: {
     storeCostsAndExpenses() {
       this.costesGastos.push({ ...this.costsAndExpenses });
@@ -152,7 +148,7 @@ export default {
       }
     },
     toggleCurrency() {
-      this.currencySymbol = toggleCurrency(this.currencySymbol);
+      this.currencySymbol = this.currencySymbol === '%' ? '$' : '%';
     },
     async fetchCostesGastos() {
       try {
@@ -164,14 +160,18 @@ export default {
       }
     },
     async deleteCostesGastos() {
-      try {
-        const response = await FinanceDataService.deleteCostesGastosAll();
-        console.log('Costs and Expenses deleted:', response.data);
-      } catch (error) {
-        console.error('Error deleting Costs and Expenses:', error.response || error.message);
+      for (const item of this.costesGastos) {
+        try {
+          const response = await FinanceDataService.deleteCostesGastos(item.id);
+          console.log('Costs and Expenses deleted:', response.data);
+        } catch (error) {
+          console.error('Error deleting Costs and Expenses:', error.response || error.message);
+        }
       }
-    }
-  }
+    },
+
+  },
+
 };
 </script>
 

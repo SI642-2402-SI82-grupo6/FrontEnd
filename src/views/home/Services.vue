@@ -1,9 +1,10 @@
 <script setup>
-import MainMenuVue from "../../components/MainMenu.vue";
+
 import wallet from '../../assets/walet.jpg';
 </script>
 
 <template>
+
 
   <div class="content-container">
     <!-- Accordion para Características Clave -->
@@ -61,6 +62,7 @@ import wallet from '../../assets/walet.jpg';
 
 <style scoped>
 .content-container {
+
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -72,7 +74,7 @@ import wallet from '../../assets/walet.jpg';
 }
 
 h2 {
-  margin-top: 0;
+
   font-size: 1.5rem;
 }
 

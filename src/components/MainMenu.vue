@@ -1,7 +1,7 @@
 
 <template>
 
-    <Menubar :model="items" >
+    <Menubar :model="items"  >
       <template #start>
         <Button @click="OnClick" variant="outlined" class="button-no-background">
           <img src="/src/assets/logo.png" alt="Logo"  class="icon icon--text-size"  />
@@ -10,13 +10,13 @@
       <template #item="{ item, props, hasSubmenu }">
         <router-link v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom>
           <a v-ripple :href="href" v-bind="props.action" @click="navigate">
-            <span :class="item.icon" />
-            <span>{{ item.label }}</span>
+            <span :class="item.icon" class="menu-icon" />
+            <span class="menu-label">{{ item.label }}</span>
           </a>
         </router-link>
         <a v-else v-ripple :href="item.route" :target="item.target" v-bind="props.action">
-          <span :class="item.icon" />
-          <span>{{ item.label }}</span>
+          <span :class="item.icon" class="menu-icon" />
+          <span class="menu-label">{{ item.label }}</span>
           <span v-if="hasSubmenu" class="pi pi-fw pi-angle-down" />
         </a>
       </template>
@@ -42,16 +42,29 @@ const items = ref([
     }
   },
   {
-    label: 'Documentos',
+    separator: true
+  },
+  {
+    label: 'Wallet',
     icon: 'pi pi-wallet',
+    command: () => {
+      router.push('/wallet');
+    },
+
     items: [
       {
-        label: 'Letra',
-        route: '/letra'
+        label: 'invoices',
+        icon: 'pi pi-credit-card',
+        command: () => {
+          router.push('/invoices');
+        }
       },
       {
-        label: 'Factura',
-        route: '/factura'
+        label: 'letters',
+        icon: 'pi pi-book',
+        command: () => {
+          router.push('/letters');
+        }
       }
     ]
   },
@@ -81,8 +94,12 @@ const items = ref([
 ]);
 </script>
 <style scoped>
-.menubar {
-  background-color: #f0f0f0; /* Cambia aquí el color de fondo */
+.menu-icon {
+  margin-right: 0.1em; /* Ajusta el valor según sea necesario */
+}
+
+.menu-label {
+  margin-left: 0.1em; /* Ajusta el valor según sea necesario */
 }
 .icon--text-size {
   width: 3em;

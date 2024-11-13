@@ -1,51 +1,28 @@
-<script>
-import FinanceDataService from "../../services/FinanceDataService.js";
+<script setup>
+import { defineProps } from 'vue';
 
-export default {
-  props: {
-    letter: {
-      type: Object,
-      required: true,
-    }
-  },
-  methods: {
-    fetchLetter() {
-      FinanceDataService.getLetra(this.LetterModel.id)
-          .then(response => {
-            this.letter = response.data;
-          })
-          .catch(error => {
-            console.error('Error fetching letter:', error);
-          });
-    },
-    viewDetails() {
-      if (this.letter) {
-        alert(`Detalles de la letra:\nNúmero: ${this.letter.number}\nFecha: ${this.letter.date}\nMonto: ${this.letter.amount}\nEstado: ${this.letter.status}`);
-      }
-    },
-    mounted() {
-      if (this.letter) {
-        this.fetchLetter();
-      }
+const props = defineProps({
+  letter: {
+    type: Object,
+    required: true
   }
-  }
+});
+
+const viewDetails = () => {
+  console.log('Viewing details for letter:', props.letter);
 };
 </script>
 
 <template>
-  <pv-card v-if="letter">
-    <div class="letter-item">
-      <div class="letter-header">
-        <h3>{{ letter.number }}</h3>
-        <p>{{ letter.date }}</p>
-      </div>
-      <div class="letter-details">
-        <p>Monto: {{ letter.amount }}</p>
-        <p>Estado: {{ letter.status }}</p>
-      </div>
-      <pv-button label="Ver detalles" icon="pi pi-search" @click="viewDetails"/>
-    </div>
-  </pv-card>
+  <DataTable :value="[letter]" responsiveLayout="scroll">
+    <!-- Cabeceras de la tabla -->
+    <Column field="fechaGiro" header="Fecha de Giro"></Column>
+    <Column field="fechaVencimiento" header="Fecha de Vencimiento"></Column>
+    <Column field="valorNominal" header="Valor Nominal"></Column>
+    <Column field="retencion" header="Retención"></Column>
+
+
+  </DataTable>
 </template>
 
 <style scoped>

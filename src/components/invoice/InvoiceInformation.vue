@@ -31,13 +31,16 @@
               <InputNumber
                   id="totalFacturado"
                   v-model="invoice.totalFacturado"
+                  :invalid="invoice.totalFacturado <= 0"
                   mode="decimal"
                   :minFractionDigits="0"
                   :maxFractionDigits="4"
                   required
                   class="input-same-width"
               ></InputNumber>
+              <Message v-if="!invoice.totalFacturado" severity="error" text="El valor debe ser mayor a 0" >Debe ser mayor a 0</Message>
             </div>
+
 
             <!-- Retención -->
             <div class="p-field p-col-12 p-md-6 field-inline">
@@ -56,6 +59,7 @@
             </div>
 
           </div>
+
         </Form>
 
 
@@ -67,7 +71,7 @@
 <script>
 import FinanceDataService from '../../services/FinanceDataService.js';
 import { reactive } from 'vue';
-
+import moment from "moment";
 export default {
   name: 'InvoiceInformation',
   data() {
@@ -83,7 +87,12 @@ export default {
   methods: {
     async submitInvoice() {
       try {
-        const response = await FinanceDataService.createFactura(this.invoice);
+        const formattedInvoice = {
+          ...this.invoice,
+          fechaEmision: moment(this.invoice.fechaEmision).format('YYYY-MM-DD'),
+          fechaPago: moment(this.invoice.fechaPago).format('YYYY-MM-DD')
+        };
+        const response = await FinanceDataService.createFactura(formattedInvoice);
         console.log('Invoice created:', response.data);
       } catch (error) {
         console.error('Error creating invoice:', error);

@@ -1,4 +1,7 @@
 <template>
+  <div class="content">
+
+
   <div class="register-container">
     <Form v-slot="$form" :resolver="resolver" :initial-values="initialValues"  @submit.prevent="handleRegister">
       <div class="login-btn">
@@ -44,7 +47,7 @@
     </Form>
 
   </div>
-
+  </div>
 </template>
 
 <script>
@@ -119,7 +122,13 @@ export default {
   font-family: Arial, sans-serif;
   font-size: 20px;
 }
-
+.content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: url('../../assets/background.jpg') no-repeat center center fixed;
+}
 body {
   background: url('../../assets/background.jpg') no-repeat center center fixed;
   background-size: cover;

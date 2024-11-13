@@ -1,16 +1,14 @@
 <script>
-import InvoiceItem from "../../components/invoice/InvoiceItem.vue";
+
 import CostsAndExpensesInformation from "../../components/costsAndExpenses/costsAndExpensesInformation.vue";
 import InvoiceInformation from "../../components/invoice/InvoiceInformation.vue";
 import RateAndTermInformation from "../../components/RateAndTerm/RateAndTermInformation.vue";
-import QueryResults from "../../components/results/QueryResults.vue";
-import MainMenu from "../../components/MainMenu.vue";
+
+
 
 export default {
   name: 'DocumentInvoice',
   components: {
-    MainMenu,
-    QueryResults,
     InvoiceInformation,
     RateAndTermInformation,
     CostsAndExpensesInformation
@@ -19,8 +17,9 @@ export default {
     async submitAll() {
       try {
         await this.$refs.invoiceInfo.submitInvoice();
-        await this.$refs.rateAndTermInfo.submitRateAndTerm();
         await this.$refs.costsAndExpensesInfo.sendAllCostsAndExpenses();
+        await this.$refs.rateAndTermInfo.submitRateAndTerm();
+
         alert('All submissions successful');
       } catch (error) {
         console.error('Error submitting forms:', error);
@@ -52,11 +51,6 @@ export default {
       </div>
     </div>
     <Button @click="submitAll" label="Agregar factura" class="submit-button" />
-    <div class="p-grid p-nogutter">
-      <div class="p-col-12">
-        <QueryResults/>
-      </div>
-    </div>
   </template>
 
 
