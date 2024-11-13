@@ -12,8 +12,10 @@
                 v-model="costsAndExpenses.tipoGasto"
                 :options="options"
                 optionLabel="label"
-                optionValue="value"
+
+
                 placeholder="Selecciona un tipo de gasto"
+
                 class="input-same-width"
             />
           </div>
@@ -46,6 +48,7 @@
             <label>
               Valor <i class="pi pi-dollar"> :</i>
             </label>
+
             <InputNumber
                 v-model="costsAndExpenses.valorExpresado.valor"
                 :invalid="costsAndExpenses.valorExpresado.valor <= 0"
@@ -58,6 +61,7 @@
                 class="input-same-width"
             />
             <Message v-if="!costsAndExpenses.valorExpresado.valor" severity="error" variant="outlined">No puede ser negativo o cero</Message>
+
           </div>
         </div>
 
@@ -71,16 +75,15 @@
               :style="{ width: '50rem' }"
               :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
           >
-            <TreeTable :value="costesGastos" class="text-surface-500 dark:text-surface-400 block mb-8">
+            <DataTable :value="costesGastos" class="text-surface-500 dark:text-surface-400 block mb-8">
               <Column field="tipoGasto" header="Tipo de Gasto"></Column>
               <Column field="motivoGasto" header="Motivo de Gasto"></Column>
               <Column header="Valor Expresado">
-                <template #body="slotProps">
-                  <span>{{ slotProps.node.data.valorExpresado?.valor }}</span>
-                  <span v-if="slotProps.node.data.valorExpresado?.esPorcentaje">%</span>
+                <template #body="{ value }">
+                  <span>{{ value.valor }} {{ value.esPorcentaje ? '%' : '$' }}</span>
                 </template>
               </Column>
-            </TreeTable>
+            </DataTable>
           </Dialog>
           <Button label="Limpiar" icon="pi pi-times" @click="deleteCostesGastos" class="button-spacing" />
         </div>
@@ -120,10 +123,7 @@ export default {
         { label: 'Gastos Registrales', value: 'GastosRegistrales' },
         { label: 'Otros Gastos', value: 'OtrosGastos' },
       ],
-      options: [
-        { label: 'INICIAL', value: 'INICIAL' },
-        { label: 'FINAL', value: 'FINAL' },
-      ],
+      options: ['INICIAL', 'FINAL'],
       currencySymbol: '$',
     };
   },
@@ -136,11 +136,8 @@ export default {
     async sendAllCostsAndExpenses() {
       try {
         for (const item of this.costesGastos) {
-          const dataToSend = {
-            ...item,
-            tipoGasto: item.tipoGasto.value
-          };
-          const response = await FinanceDataService.createCostesGastos(dataToSend);
+
+          const response = await FinanceDataService.createCostesGastos(item);
           console.log('Costs and Expenses created:', response.data);
         }
         this.costesGastos = []; // Clear local storage after sending
@@ -170,7 +167,9 @@ export default {
         }
       }
     },
+
   },
+
 };
 </script>
 
