@@ -2,7 +2,7 @@
   <Card title="Gastos">
     <template #content>
       <h3>Agregar Gastos</h3>
-      <form @submit="storeCostsAndExpenses">
+      <form >
         <div class="move-right">
           <div class="p-field p-col-12 p-md-6 field-inline">
             <label for="tipoGasto" class="black-text">
@@ -66,7 +66,7 @@
         </div>
 
         <div class="card flex justify-content-center">
-          <Button type="submit" class="black-text button-spacing">Guardar</Button>
+          <Button type="submit" class="black-text button-spacing" @click="storeCostsAndExpenses">Guardar</Button>
           <Button label="Show" icon="pi pi-external-link" @click="visible = true" class="button-spacing" />
           <Dialog
               v-model:visible="visible"
