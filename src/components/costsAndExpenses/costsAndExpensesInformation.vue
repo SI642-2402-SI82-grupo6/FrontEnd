@@ -127,9 +127,11 @@ export default {
 
   methods: {
     storeCostsAndExpenses() {
-      this.costesGastos.push({ ...this.costsAndExpenses });
+      // Usar JSON.parse y JSON.stringify para hacer una copia profunda
+      this.costesGastos.push(JSON.parse(JSON.stringify(this.costsAndExpenses)));
       console.log('Stored data locally:', this.costesGastos);
     },
+
     async sendAllCostsAndExpenses() {
       try {
         for (const item of this.costesGastos) {
