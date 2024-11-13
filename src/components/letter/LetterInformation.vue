@@ -55,7 +55,6 @@
             </div>
 
           </div>
-          <Button type="submit" label="Submit" @click="submitLetter"/>
         </Form>
       </div>
     </template>
