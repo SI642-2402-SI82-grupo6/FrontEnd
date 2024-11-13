@@ -13,9 +13,7 @@
                 :options="options"
                 optionLabel="label"
                 optionValue="value"
-
                 placeholder="Selecciona un tipo de gasto"
-
                 class="input-same-width"
             />
           </div>
@@ -48,7 +46,6 @@
             <label>
               Valor <i class="pi pi-dollar"> :</i>
             </label>
-
             <InputNumber
                 v-model="costsAndExpenses.valorExpresado.valor"
                 :invalid="costsAndExpenses.valorExpresado.valor <= 0"
@@ -61,7 +58,6 @@
                 class="input-same-width"
             />
             <Message v-if="!costsAndExpenses.valorExpresado.valor" severity="error" variant="outlined">No puede ser negativo o cero</Message>
-
           </div>
         </div>
 
@@ -75,15 +71,16 @@
               :style="{ width: '50rem' }"
               :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
           >
-            <DataTable :value="costesGastos" class="text-surface-500 dark:text-surface-400 block mb-8">
+            <TreeTable :value="costesGastos" class="text-surface-500 dark:text-surface-400 block mb-8">
               <Column field="tipoGasto" header="Tipo de Gasto"></Column>
               <Column field="motivoGasto" header="Motivo de Gasto"></Column>
               <Column header="Valor Expresado">
                 <template #body="slotProps">
                   <span>{{ slotProps.node.data.valorExpresado?.valor }}</span>
+                  <span v-if="slotProps.node.data.valorExpresado?.esPorcentaje">%</span>
                 </template>
               </Column>
-            </DataTable>
+            </TreeTable>
           </Dialog>
           <Button label="Limpiar" icon="pi pi-times" @click="deleteCostesGastos" class="button-spacing" />
         </div>
@@ -173,9 +170,7 @@ export default {
         }
       }
     },
-
   },
-
 };
 </script>
 
