@@ -78,10 +78,7 @@
             <DataTable :value="costesGastos" class="text-surface-500 dark:text-surface-400 block mb-8">
               <Column field="tipoGasto" header="Tipo de Gasto"></Column>
               <Column field="motivoGasto" header="Motivo de Gasto"></Column>
-              <Column header="Valor Expresado">
-                <template #body="{ value }">
-                  <span>{{ value.valor }} {{ value.esPorcentaje ? '%' : '$' }}</span>
-                </template>
+              <Column field="valorExpresado.valor" header="Valor Expresado">
               </Column>
             </DataTable>
           </Dialog>
