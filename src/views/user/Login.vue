@@ -1,7 +1,7 @@
 <template>
   <div class="content">
   <div class="login-container">
-    <Form v-slot="$form" :resolver="resolver" :initial-values="initialValues"  @submit.prevent="handleLogin" >
+    <Form v-slot="$form" :resolver="resolver" :initial-values="initialValues"  @submit="handleLogin" >
       <h2>Login</h2>
       <img src="../../assets/logo.png" alt="Logo" class="login-image" />
       <div class="flex flex-column row-gap-6">

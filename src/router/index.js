@@ -13,6 +13,8 @@ import WalletView from "../views/document/WalletView.vue";
 import InvoiceView from "../views/document/InvoiceView.vue";
 import LetterView from "../views/document/LetterView.vue";
 import InvoiceList from "../components/invoice/InvoiceList.vue";
+import NotFound from '../views/NotFound.vue'; // Ensure this import
+
 function isAuthenticated() {
   const user = JSON.parse(localStorage.getItem('user'));
   console.log('User:', user); // Verify the user
@@ -101,6 +103,11 @@ const routes = [
     component: WalletResult,
     meta: { requiresAuth: true },
     props: true
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: NotFound
   }
 ];
 

@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "start": "serve dist ",
+    "start": "npx serve dist --single",
     "build": "vite build",
     "preview": "vite preview"
   },
