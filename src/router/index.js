@@ -30,31 +30,36 @@ const routes = [
     path: '/invoice-information',
     name: 'InvoiceInformation',
     component: InvoiceView,
+    meta: { requiresAuth: true }
   },
   {
     path: '/letter-information',
     name: 'LetterInformation',
     component: LetterView,
+    meta: { requiresAuth: true }
   },
   {
     path: '/letters',
     name: 'LetterList',
     component: LetterList,
+    meta: { requiresAuth: true }
   },
   {
     path: '/invoices',
     name: 'InvoiceList',
     component: InvoiceList,
+    meta: { requiresAuth: true }
   },
   {
     path: '/wallet',
     name: 'WalletView',
     component: WalletView,
+    meta: { requiresAuth: true }
   },
   {
     path: "/login",
     name: "login",
-    component: Login
+    component: Login,
   },
   {
     path: '/home',
@@ -89,6 +94,7 @@ const routes = [
     path: '/invoice/:id',
     name: 'InvoiceDetails',
     component: InvoiceDetails,
+    meta: { requiresAuth: true },
     props: true
   },
   {
