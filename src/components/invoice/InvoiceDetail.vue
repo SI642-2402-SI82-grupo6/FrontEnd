@@ -4,7 +4,9 @@ import { useRoute } from 'vue-router';
 import FinanceDataService from '../../services/FinanceDataService.js';
 
 const route = useRoute();
-const invoiceDetails = ref(route.state?.data || null); // Intentar obtener datos del estado del router
+const invoiceDetails = ref(route.state?.data || null);
+console.log('Datos del documento:', route.state?.data );
+// Intentar obtener datos del estado del router
 const loading = ref(true);
 
 // Función para realizar una llamada a la API si no hay datos
