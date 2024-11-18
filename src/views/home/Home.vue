@@ -3,8 +3,7 @@
     <div class="main-menu">
       <MainMenuVue />
     </div>
-    <div class="content">
-      <Card class="welcome-card">
+    <Card>
         <template #header>
           <div class="welcome-header">
             <i class="pi pi-home" style="font-size: 2em; color: #4CAF50;"></i>
@@ -17,8 +16,7 @@
           </p>
           <Button label="Explorar servicios" icon="pi pi-search" class="explore-button" />
         </template>
-      </Card>
-    </div>
+    </Card>
   </div>
 </template>
 
@@ -45,21 +43,7 @@ export default {
   left: 0;
 }
 
-.content {
-  margin-left: 200px;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
 
-.welcome-card {
-  max-width: 600px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
 
 .welcome-header {
   display: flex;

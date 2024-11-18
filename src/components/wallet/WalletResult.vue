@@ -35,16 +35,17 @@ const fetchWalletResults = () => {
       });
 };
 
-// Modificado para pasar datos directamente al componente de detalles
+
 const handleRowClick = (rowData) => {
-  const { documentoId, tipoDocumento } = rowData;
+  const { documentoId, type } = rowData;
 
   router.push({
-    name: tipoDocumento === 'LETRA' ? 'LetraDetail' : 'FacturaDetail',
-    params: { id: documentoId }, // ID para la ruta
-    state: { data: rowData } // Pasamos la fila completa como estado
+    name: type === 'LETRA' ? 'LetraDetail' : 'FacturaDetail', // Navegar según el tipo de documento
+    params: { id: documentoId },
+    state: { data: rowData },
   });
 };
+
 
 onMounted(fetchWalletResults);
 </script>
