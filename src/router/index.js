@@ -113,13 +113,13 @@ const routes = [
     props: true
   },
   {
-    path: '/letras/:id', // Ruta para los detalles de una letra
+    path: '/letras/:documentoId', // Ruta para los detalles de una letra
     name: 'LetraDetail',
     component: LetterDetail,
     props: true, // Permite pasar `id` como prop al componente
   },
   {
-    path: '/facturas/:id', // Ruta para los detalles de una factura
+    path: '/facturas/:documentoId', // Ruta para los detalles de una factura
     name: 'FacturaDetail',
     component: InvoiceDetail,
     props: true, // Permite pasar `id` como prop al componente

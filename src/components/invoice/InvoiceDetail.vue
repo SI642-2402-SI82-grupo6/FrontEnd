@@ -4,14 +4,13 @@ import { useRoute } from 'vue-router';
 import FinanceDataService from '../../services/FinanceDataService.js';
 
 const route = useRoute();
-const invoiceDetails = ref(route.state?.data || null);
-console.log('Datos del documento:', route.state?.data );
+const invoiceDetails = ref();
 // Intentar obtener datos del estado del router
 const loading = ref(true);
 
 // Función para realizar una llamada a la API si no hay datos
 const fetchInvoiceDetails = () => {
-  const id = route.params.id; // Obtener el ID de los parámetros de la URL
+  const id = route.params.id;
   FinanceDataService.getFactura(id)
       .then(response => {
         invoiceDetails.value = response.data;
