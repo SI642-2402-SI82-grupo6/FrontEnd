@@ -32,19 +32,21 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
-    <h2>Detalle de Letra</h2>
-    <div v-if="loading">Cargando...</div>
-    <div v-else-if="letterDetails">
-      <p><strong>ID:</strong> {{ letterDetails.id }}</p>
-      <p><strong>Fecha de Giro:</strong> {{ letterDetails.fechaGiro }}</p>
-      <p><strong>Fecha de Vencimiento:</strong> {{ letterDetails.fechaVencimiento }}</p>
-      <p><strong>Valor Nominal:</strong> {{ letterDetails.valorNominal }}</p>
-      <p><strong>Retención:</strong> {{ letterDetails.retencion }}</p>
-    </div>
-    <div v-else>
+  <div class="card" v-if="!loading">
+    <h2 class="card-title">Detalle de Letra</h2>
+    <ProgressSpinner v-if="loading" style="display: block; margin: 20px auto;" />
+
+    <template v-else-if="letterDetails">
+      <DataTable :value="letterDetails" class="p-datatable-striped">
+        <Column field="fechaGiro" header="Fecha de Giro"></Column>
+        <Column field="fechaVencimiento" header="Fecha de Vencimiento"></Column>
+        <Column field="valorNominal" header="Valor Nominal"></Column>
+        <Column field="retencion" header="Retención"></Column>
+      </DataTable>
+    </template>
+    <template v-else>
       <p>No se encontraron datos de la letra.</p>
-    </div>
+    </template>
   </div>
 </template>
 
