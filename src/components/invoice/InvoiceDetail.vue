@@ -14,7 +14,7 @@ const fetchInvoiceDetails = () => {
   FinanceDataService.getFactura(id)
       .then(response => {
         invoiceDetails.value = response.data;
-        console.log('Invoice details:', invoiceDetails.value);
+
         loading.value = false;
 
       })
@@ -44,7 +44,7 @@ onMounted(() => {
 
     <!-- Detalle de la factura -->
     <template v-else-if="invoiceDetails">
-      <DataTable :value="invoiceDetails" class="p-datatable-striped">
+      <DataTable :value="[invoiceDetails]" class="p-datatable-striped">
         <Column field="fechaEmision" header="Fecha de Emisión"></Column>
         <Column field="fechaPago" header="Fecha de Pago"></Column>
         <Column field="totalFacturado" header="Total Facturado"></Column>
