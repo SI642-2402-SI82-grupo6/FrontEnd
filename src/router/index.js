@@ -116,11 +116,13 @@ const routes = [
     path: '/letter-detail/:documentoId',
     name: 'LetterDetail',
     component: LetterDetail, // Asegúrate de que este componente esté importado correctamente
+    meta: { requiresAuth: true },
   },
   {
     path: '/invoice-detail/:documentoId',
     name: 'InvoiceDetail',
     component: InvoiceDetail, // Asegúrate de que este componente esté importado correctamente
+    meta: { requiresAuth: true },
   },
   {
     path: '/:pathMatch(.*)*',
