@@ -39,6 +39,11 @@ const fetchWalletResults = () => {
 const handleRowClick = (rowData) => {
   console.log('Datos de la fila:', rowData.data.documentoId);  // Verifica que rowData.data tiene los datos completos
   console.log('Tipo de documento:', rowData.data.type);  // Verifica que rowData.data tiene el tipo de documento
+  if (rowData.data.type === 'LETRA') {
+    router.push({ name: 'LetterDetail', params: { id: rowData.data.documentoId } });
+  } else if (rowData.data.type === 'FACTURA') {
+    router.push({ name: 'InvoiceDetail', params: { id: rowData.data.documentoId } });
+  }
 
 
 };
