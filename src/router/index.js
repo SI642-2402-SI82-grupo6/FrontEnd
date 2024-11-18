@@ -113,16 +113,14 @@ const routes = [
     props: true
   },
   {
-    path: '/letras/:documentoId', // Ruta para los detalles de una letra
-    name: 'LetraDetail',
-    component: LetterDetail,
-    props: true, // Permite pasar `id` como prop al componente
+    path: '/letter-detail/:documentoId',
+    name: 'LetterDetail',
+    component: LetterDetail, // Asegúrate de que este componente esté importado correctamente
   },
   {
-    path: '/facturas/:documentoId', // Ruta para los detalles de una factura
-    name: 'FacturaDetail',
-    component: InvoiceDetail,
-    props: true, // Permite pasar `id` como prop al componente
+    path: '/invoice-detail/:documentoId',
+    name: 'InvoiceDetail',
+    component: InvoiceDetail, // Asegúrate de que este componente esté importado correctamente
   },
   {
     path: '/:pathMatch(.*)*',
