@@ -14,7 +14,9 @@ const fetchInvoiceDetails = () => {
   FinanceDataService.getFactura(id)
       .then(response => {
         invoiceDetails.value = response.data;
+        console.log('Invoice details:', invoiceDetails.value);
         loading.value = false;
+
       })
       .catch(error => {
         console.error('Error fetching invoice details:', error);
@@ -25,6 +27,7 @@ const fetchInvoiceDetails = () => {
 // Comprobación: si no hay datos, realizar la llamada a la API
 onMounted(() => {
   if (!invoiceDetails.value) {
+
     fetchInvoiceDetails();
   } else {
     loading.value = false; // Si ya hay datos, no mostrar "Cargando..."
