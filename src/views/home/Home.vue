@@ -11,10 +11,12 @@
             <h1>Bienvenidos a PYME Wadle</h1>
           </div>
         </template>
-        <p>
-          En PYME Wadle, nos especializamos en ayudarte a tener más control sobre tus tasas, letras y facturas. Simplificamos la gestión financiera para que puedas tomar decisiones informadas y eficientes para tu negocio.
-        </p>
-        <Button label="Explorar servicios" icon="pi pi-search" class="explore-button" />
+        <template #content>
+          <p>
+            En PYME Wadle, nos especializamos en ayudarte a tener más control sobre tus tasas, letras y facturas. Simplificamos la gestión financiera para que puedas tomar decisiones informadas y eficientes para tu negocio.
+          </p>
+          <Button label="Explorar servicios" icon="pi pi-search" class="explore-button" />
+        </template>
       </Card>
     </div>
   </div>

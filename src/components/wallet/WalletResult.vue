@@ -1,15 +1,12 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import FinanceDataService from '../../services/FinanceDataService.js';
 
-
 const route = useRoute();
+const router = useRouter();
 const walletResults = ref([]);
 const columns = [
-
-
-  { field: 'documentoId', header: 'Documento ID' },
   { field: 'numeroConsulta', header: 'Número de Consulta' },
   { field: 'fechaGiro', header: 'Fecha de Giro' },
   { field: 'valorNomAplicando', header: 'Valor Nominal Aplicando' },
@@ -38,23 +35,42 @@ const fetchWalletResults = () => {
       });
 };
 
+// Modificado para pasar datos directamente al componente de detalles
+const handleRowClick = (rowData) => {
+  const { documentoId, tipoDocumento } = rowData;
+
+  router.push({
+    name: tipoDocumento === 'LETRA' ? 'LetraDetail' : 'FacturaDetail',
+    params: { id: documentoId }, // ID para la ruta
+    state: { data: rowData } // Pasamos la fila completa como estado
+  });
+};
+
 onMounted(fetchWalletResults);
 </script>
+
+
 
 
 
 <template>
   <div>
     <div>
-      <h2>Wallet Results</h2>
+      <h2>Resultados de la Cartera</h2>
       <div class="table-wrapper">
-        <DataTable :value="walletResults">
-          <Column v-for="col in columns" :key="col.field" :field="col.field" :header="col.header"></Column>
+        <DataTable :value="walletResults" @row-click="handleRowClick">
+          <Column
+              v-for="col in columns"
+              :key="col.field"
+              :field="col.field"
+              :header="col.header"
+          ></Column>
         </DataTable>
       </div>
     </div>
   </div>
 </template>
+
 
 <style scoped>
 .table-wrapper {

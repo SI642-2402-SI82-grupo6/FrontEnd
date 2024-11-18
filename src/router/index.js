@@ -6,14 +6,16 @@ import LetterList from "../components/letter/LetterList.vue";
 import About from "../views/home/About.vue";
 import Contact from "../views/home/Contact.vue";
 import Services from "../views/home/Services.vue";
-import InvoiceDetails from "../components/invoice/InvoiceDetails.vue";
+import InvoiceDetails from "../components/invoice/InvoiceDetail.vue";
 import WalletList from '../components/wallet/WalletList.vue';
 import WalletResult from '../components/wallet/WalletResult.vue';
 import WalletView from "../views/document/WalletView.vue";
 import InvoiceView from "../views/document/InvoiceView.vue";
 import LetterView from "../views/document/LetterView.vue";
 import InvoiceList from "../components/invoice/InvoiceList.vue";
-import NotFound from '../views/NotFound.vue'; // Ensure this import
+import NotFound from '../views/NotFound.vue';
+import LetterDetail from "../components/letter/LetterDetail.vue";
+import InvoiceDetail from "../components/invoice/InvoiceDetail.vue"; // Ensure this import
 
 function isAuthenticated() {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -111,10 +113,22 @@ const routes = [
     props: true
   },
   {
+    path: '/letras/:id', // Ruta para los detalles de una letra
+    name: 'LetraDetail',
+    component: LetterDetail,
+    props: true, // Permite pasar `id` como prop al componente
+  },
+  {
+    path: '/facturas/:id', // Ruta para los detalles de una factura
+    name: 'FacturaDetail',
+    component: InvoiceDetail,
+    props: true, // Permite pasar `id` como prop al componente
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: NotFound
-  }
+  },
 ];
 
 const router = createRouter({
