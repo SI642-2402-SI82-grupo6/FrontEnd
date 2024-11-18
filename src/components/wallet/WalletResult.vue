@@ -37,13 +37,13 @@ const fetchWalletResults = () => {
 
 
 const handleRowClick = (rowData) => {
-  const { documentoId, type } = rowData;
-  console.log ('rowData:', rowData);
+  const { documentoId, type } = rowData.data;
+  console.log('Datos de la fila:', rowData.data);  // Verifica que rowData.data tiene los datos completos
 
   router.push({
-    name: type === 'LETRA' ? 'LetraDetail' : 'FacturaDetail', // Navegar según el tipo de documento
+    name: type === 'LETRA' ? 'LetraDetail' : 'FacturaDetail',
     params: { id: documentoId },
-    state: { data: rowData },
+    state: { data: rowData.data },  // Pasa todos los datos completos de la fila
   });
 };
 
