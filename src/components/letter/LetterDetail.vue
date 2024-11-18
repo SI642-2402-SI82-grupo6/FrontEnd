@@ -37,7 +37,7 @@ onMounted(() => {
     <ProgressSpinner v-if="loading" style="display: block; margin: 20px auto;" />
 
     <template v-else-if="letterDetails">
-      <DataTable :value="letterDetails" class="p-datatable-striped">
+      <DataTable :value="[letterDetails]" class="p-datatable-striped">
         <Column field="fechaGiro" header="Fecha de Giro"></Column>
         <Column field="fechaVencimiento" header="Fecha de Vencimiento"></Column>
         <Column field="valorNominal" header="Valor Nominal"></Column>
