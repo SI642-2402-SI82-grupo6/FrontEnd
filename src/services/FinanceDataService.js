@@ -116,6 +116,9 @@ class FinanceDataService {
     obtenerDocumentosCreados(){
         return http.get(`/wallet/resultados/consulta/obtenerDocumentosCreados`);
     }
+    obtenerDocumentosCreadoPorId(id){
+        return http.get(`/wallet/resultados/consulta/obtenerDocumentoCreadoPorId/${id}`);
+    }
 
     eliminarCartera(id) {
         return http.delete(`/wallet/cartera/eliminarCartera?carteraId=${id}`);

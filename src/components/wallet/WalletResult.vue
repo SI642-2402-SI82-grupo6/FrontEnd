@@ -38,6 +38,7 @@ const fetchWalletResults = () => {
 
 const handleRowClick = (rowData) => {
   const { documentoId, type } = rowData;
+  console.log ('rowData:', rowData);
 
   router.push({
     name: type === 'LETRA' ? 'LetraDetail' : 'FacturaDetail', // Navegar según el tipo de documento
