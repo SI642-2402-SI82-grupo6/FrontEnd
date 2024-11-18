@@ -37,8 +37,8 @@ const fetchWalletResults = () => {
 
 
 const handleRowClick = (rowData) => {
-  const { documentoId, type } = rowData;
   console.log('Datos de la fila:', rowData.data.documentoId);  // Verifica que rowData.data tiene los datos completos
+  console.log('Tipo de documento:', rowData.data.type);  // Verifica que rowData.data tiene el tipo de documento
 
 
 };
