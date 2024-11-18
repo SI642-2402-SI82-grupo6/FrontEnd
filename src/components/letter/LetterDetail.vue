@@ -9,7 +9,7 @@ const loading = ref(true);
 
 // Función para realizar una llamada a la API si no hay datos
 const fetchLetterDetails = () => {
-  const id = route.params.id; // Obtener el ID de los parámetros de la URL
+  const id = route.params.documentoId; // Obtener el ID de los parámetros de la URL
   FinanceDataService.getLetra(id)
       .then(response => {
         letterDetails.value = response.data;

@@ -10,7 +10,7 @@ const loading = ref(true);
 
 // Función para realizar una llamada a la API si no hay datos
 const fetchInvoiceDetails = () => {
-  const id = route.params.id;
+  const id = route.params.documentoId;
   FinanceDataService.getFactura(id)
       .then(response => {
         invoiceDetails.value = response.data;
